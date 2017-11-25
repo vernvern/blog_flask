@@ -8,3 +8,6 @@ install:
 script:
     - python tests/test_test.py
 
+
+after_success:
+    - coveralls
