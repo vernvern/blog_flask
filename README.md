@@ -1,4 +1,4 @@
-https://travis-ci.org/vernvern/blog.svg?branch=master
+[![Build Status](https://travis-ci.org/vernvern/blog.svg?branch=master)](https://travis-ci.org/vernvern/blog)
 # blog
 
 ## 项目结构
