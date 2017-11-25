@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/vernvern/blog.svg?branch=master)](https://travis-ci.org/vernvern/blog)
+[![Coverage Status](https://coveralls.io/repos/github/vernvern/blog/badge.svg?branch=master)](https://coveralls.io/github/vernvern/blog?branch=master)
 # blog
 
 ## 项目结构
