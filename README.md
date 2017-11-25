@@ -1,3 +1,4 @@
+https://travis-ci.org/vernvern/blog.svg?branch=master
 # blog
 
 ## 项目结构
