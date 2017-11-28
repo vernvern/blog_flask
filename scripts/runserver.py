@@ -1,5 +1,4 @@
 from blog import app
 
 
-def runserver():
-    app.run(debug=True)
+app.run(debug=True)
