@@ -21,7 +21,7 @@ def http(rule=None, **options):
         finally:
             if profix[0] != '/':
                 profix = '/' + profix
-        
+
         if rule is None:
             rule = func.__name__
         elif rule.startswith('/'):
