@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding=utf-8 -*-
 
 import sys
 import glob
@@ -90,7 +91,7 @@ def nosetest():
     - 代码覆盖率检查
     '''
     output = __process('nosetests --with-coverage --cover-erase \
-                        --cover-package=rsss --cover-xml')
+                        --cover-package=blog --cover-xml')
     output = output[1].decode('utf-8').split('\n')
     for line in output:
         print(line)
@@ -113,21 +114,21 @@ def total(msg):
 
     打印错误信息
     '''
-    [print(x) for x in itertools.chain(*msg)]
+    return [print(x) for x in itertools.chain(*msg)]
 
 
 def show_result(status):
-        print(GOOD_RESULT if status else BAD_RESULT)
+        print(GOOD_RESULT if status == 0  else BAD_RESULT)
 
 
 def main():
-    status = 1
+    status = 0
     msg = []
     func_list = [nosetest]
     for func in func_list:
         check = func()
         if check['status'] is False:
-            status = 0
+            status = 1
             msg.append(check['msg'])
 
     total(msg)
