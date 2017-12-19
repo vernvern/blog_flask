@@ -28,6 +28,7 @@ if __name__ == '__main__':
             popen = subprocess.Popen(['coverage', 'run', '--source=.', '-m',
                                       'unittest', 'tests.%s' % arg],
                                      stderr=subprocess.PIPE)
+
             if popen.wait():
                 files = [f[:-3] for f in os.listdir('tests') if f[0] != '_']
                 print('\nThere is not mpdule name "%s" with -t.' % arg)
