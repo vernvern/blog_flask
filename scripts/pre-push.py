@@ -12,6 +12,7 @@ import xml.etree.ElementTree as ET
 # config
 
 COVERAGE_RATE = 0.9
+COVERAGE_MODULES = ['modules']
 
 GOOD_RESULT = " \
                        _       _ \n \
@@ -48,24 +49,27 @@ def _coverage():
     files = glob.glob('**/*coverage.xml', recursive=True)
     status = True
     msg = []
-    if files:
-        tree = ET.ElementTree(file=files[0])
-        packages = tree.getroot()[1]
-        for package in packages:
-            if package.attrib['name'] == 'modules':
-                for classes in package:
-                    for tmp_class in classes:
-                        data = tmp_class.attrib
-                        rate = float(data['line-rate'])
-                        if rate < COVERAGE_RATE:
-                            status = False
-                            name = data['filename']
-                            msg.append("%s's coverage rate is too low \
-                                        to pass(%s(now) -> %s(expect))"
-                                       % (name, rate, COVERAGE_RATE))
-    else:
-        status = False
-        msg.append('coverage.xml is not found,please run coverage before this')
+    tree = ET.ElementTree(file=files[0])
+    packages = tree.getroot()[1]
+    for package in packages:
+        if package.attrib['name'] not in COVERAGE_MODULES:
+            continue
+
+        for classes in package:
+            for tmp_class in classes:
+                data = tmp_class.attrib
+                rate = float(data['line-rate'])
+                if rate > COVERAGE_RATE:
+                    continue
+
+                status = False
+                name = data['filename']
+                msg.append("coverage: %s's coverage rate is too low \
+                            to pass(%s(now) -> %s(expect))"
+                           % (name, rate, COVERAGE_RATE))
+
+    if status:
+        msg.append('coverage: pass')
 
     return {'status': status, 'msg': msg}
 
@@ -97,14 +101,14 @@ def nosetest():
         print(line)
         if line.startswith('FAILED'):
             status = False
-            msg = 'unittests %s' % line
+            msg = ['unittests: %s' % line]
             break
     else:
         status = True
-        msg = ''
+        msg = ['unittest: pass']
     coverage = _coverage()
     status = coverage['status'] if status else False
-    msg = coverage['msg'].insert(0, msg)
+    msg.extend(coverage['msg'])
     return {'status': status, 'msg': msg}
 
 
@@ -129,8 +133,7 @@ def main():
         check = func()
         if check['status'] is False:
             status = 1
-            msg.append(check['msg'])
-
+        msg.append(check['msg'])
     total(msg)
     show_result(status)
     sys.exit(status)
