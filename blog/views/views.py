@@ -13,4 +13,4 @@ def test1():
 
 @http()
 def test2():
-    return 'hello world2'
+    return {'data': []}
