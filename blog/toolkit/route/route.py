@@ -15,13 +15,11 @@ def http(rule=None, **options):
             exec(imp)
         except ImportError as e:
             profix = '/'.join(func.__module__.split('.')[2:])
-            print(profix)
         else:
             profix = eval('urls')
         finally:
             if profix[0] != '/':
                 profix = '/' + profix
-
         if rule is None:
             rule = func.__name__
         elif rule.startswith('/'):
@@ -30,8 +28,9 @@ def http(rule=None, **options):
         # 具体路径
         rule = os.path.join(profix, rule)
 
-        print(rule)
         # 写路由
         endpoint = options.pop('endpoint', None)
         app.add_url_rule(rule, endpoint, func, **options)
+        return func
+
     return decorator
