@@ -122,7 +122,7 @@ def total(msg):
 
 
 def show_result(status):
-        print(GOOD_RESULT if status == 0  else BAD_RESULT)
+        print(GOOD_RESULT if status == 0 else BAD_RESULT)
 
 
 def main():
