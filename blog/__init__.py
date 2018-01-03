@@ -1,4 +1,5 @@
 from flask import Flask, Response, jsonify
+from flask_sqlalchemy import SQLAlchemy
 
 
 class MyResponse(Response):
@@ -26,5 +27,13 @@ class MyResponse(Response):
 
 app = Flask(__name__)
 app.response_class = MyResponse
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/vernli/python/' \
+                                        'blog/test.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
+# 加载数据表
+from blog.models.page import *
+
+# 注册url
 import blog.views.views

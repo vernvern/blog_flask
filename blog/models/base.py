@@ -1,13 +1,11 @@
 from blog import db
 
-import flask_sqlalchemy
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from sqlalchemy.sql import func
-from sqlalchemy.ext.declarative import as_declarative, declared_attr
+from sqlalchemy.ext.declarative import declared_attr
 
 
-@as_declarative()
-class BaseModel(flask_sqlalchemy.Model):
+class BaseModel(object):
     @declared_attr
     def __tablename__(self):
         return self.__name__.lower()
