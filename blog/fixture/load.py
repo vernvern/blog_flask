@@ -32,6 +32,7 @@ def load_data():
                         if k == 'id' and cls.query.filter_by(id=v).first():
                             break
                         else:
+                            print(table, k, v)
                             setattr(obj, k, v)
                     else:
                         objs.append(obj)
