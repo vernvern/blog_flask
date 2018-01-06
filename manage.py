@@ -5,6 +5,7 @@ Usage:
     manage.py -t
     manage.py -t <test_name>
     manage.py -s <script>
+    manage.py load_data
 
 
 """
@@ -14,6 +15,8 @@ import subprocess
 from docopt import docopt
 
 import scripts
+
+from blog.fixture.load import load_data
 
 
 if __name__ == '__main__':
@@ -50,3 +53,8 @@ if __name__ == '__main__':
             for f in files:
                 print('- %s' % f)
             print('\n')
+
+    if argments['load_data']:
+        print('load test data start')
+        load_data()
+        print('load test data end')

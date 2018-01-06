@@ -2,7 +2,8 @@ import sys
 import glob
 import yaml
 import inspect
-from blog import db
+
+from .. import db
 
 
 def get_cls(table):
@@ -32,7 +33,6 @@ def load_data():
                         if k == 'id' and cls.query.filter_by(id=v).first():
                             break
                         else:
-                            print(table, k, v)
                             setattr(obj, k, v)
                     else:
                         objs.append(obj)
@@ -40,5 +40,5 @@ def load_data():
         db.session.commit()
 
 
-if __name__ == '__main__':
-    load_data()
+# if __name__ == '__main__':
+#     load_data()
