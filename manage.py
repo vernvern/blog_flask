@@ -6,6 +6,7 @@ Usage:
     manage.py -t <test_name>
     manage.py -s <script>
     manage.py load_data
+    manage.py db <operate>
 
 
 """
@@ -14,10 +15,10 @@ import os
 import subprocess
 from docopt import docopt
 
-import scripts
 
+from blog import db
 from blog.fixture.load import load_data
-
+import scripts
 
 if __name__ == '__main__':
     argments = docopt(__doc__)
@@ -58,3 +59,13 @@ if __name__ == '__main__':
         print('load test data start')
         load_data()
         print('load test data end')
+    if argments['db']:
+        arg = argments['<operate>']
+        if arg == 'create':
+            print('create database tables start')
+            db.create_all()
+            print('create database tables start')
+        elif arg == 'drop':
+            print('drop database tables start')
+            db.drop_all()
+            print('drop database tables start')
