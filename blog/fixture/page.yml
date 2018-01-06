@@ -1,0 +1,8 @@
+- table: page
+  list:
+    - title: title
+      id: 1
+      body: asd
+    - title: title1
+      id: 123123
+      body: asd1
