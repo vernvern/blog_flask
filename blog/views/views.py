@@ -1,9 +1,14 @@
+from flask import render_template
+
 from blog.toolkit.route.route import http
 
+urls = '/'
 
+
+@http('/')
 @http('/index')
 def index():
-    return 'hello world'
+    return render_template('index.html')
 
 
 @http('/test1', methods=['POST'])
