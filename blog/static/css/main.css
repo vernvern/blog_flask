@@ -1,47 +1,15 @@
-
-
-.nav {
-    height: 30px;
+.mynav {
+    height: 42px;
     border: none;
     border-bottom:solid;
     border-bottom-color:rgba(40, 40, 40, 0.15);
     border-bottom-width:1px;}
-
-
-.nav_a_checked{
-    height: 30px;
-    display: block;
-    font-size: 15px;
-    border-top:solid;
-    border-top-color: rgba(40, 40, 40, 0.15);
-    border-top-width:1px;
-    border-left:solid;
-    border-left-color: rgba(40, 40, 40, 0.15);
-    border-left-width:1px;
-    border-right:solid;
-    border-right-color: rgba(40, 40, 40, 0.15);
-    border-right-width:1px;
-    border-bottom:solid;
-    border-bottom-color: white;
-    border-bottom-width:1px;
-    text-align:center;
-    line-height: 30px;}
-
-
-.nav_a_unchecked{
-    height: 30px;
-    font-size: 15px;
-    width: 90px;
-    height: 100%;
-    text-align:center;
-    line-height: 30px}
 
 .side{
     border: none;
     border-left:solid;
     border-left-color: rgba(40, 40, 40, 0.15);
     border-left-width:1px;}
-
 
 #main_board{
     }
