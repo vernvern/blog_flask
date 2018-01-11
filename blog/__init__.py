@@ -36,3 +36,4 @@ from blog.models.page import *
 
 # 注册url
 import blog.views.views
+import blog.views.api.page
