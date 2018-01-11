@@ -10,8 +10,8 @@ class TestCasePage(unittest.TestCase):
 
     def test_get_page_list(self):
         ret = modules_page.get_page_list(self.keyword)
-        for page in ret['data']:
-            self.assertTrue(self.keyword in page['title'])
+        for data in ret['data']:
+            self.assertTrue(self.keyword in data['title'])
 
 
 if __name__ == '__main':
