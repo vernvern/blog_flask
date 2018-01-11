@@ -1,8 +1,8 @@
 - table: page
   list:
-    - title: title
+    - title: 关键字标题
       id: 1
       body: asd
-    - title: title1
+    - title: 标题
       id: 123123
       body: asd1
