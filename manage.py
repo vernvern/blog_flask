@@ -28,20 +28,21 @@ if __name__ == '__main__':
 
     if argments['-t']:
         arg = argments['<test_name>']
-        if arg:
-            popen = subprocess.Popen(['coverage', 'run', '--source=.', '-m',
-                                      'unittest', 'tests.%s' % arg],
-                                     stderr=subprocess.PIPE)
-
-            if popen.wait():
-                files = [f[:-3] for f in os.listdir('tests') if f[0] != '_']
-                print('\nThere is not mpdule name "%s" with -t.' % arg)
-                print('Please input anything such as:\n')
-                for f in files:
-                    print('- %s' % f)
-                print('\n')
+        files = [f[:-3] for f in os.listdir('tests') if f[0] != '_']
+        if arg is None:
+            os.system('nosetests tests/*.py --with-coverage'
+                      '--cover-package=blog --cover-xml')
+        elif arg in files:
+            popen = subprocess.Popen(['nosetests', 'tests/%s.py' % arg,
+                                      '--with-coverage',
+                                      '--cover-package=blog', '--cover-xml'],
+                                     stderr=subprocess.STDOUT)
         else:
-            os.system('coverage run --source=blog -m unittest discover -v')
+            print('\nThere is not mpdule name "%s" with -t.' % arg)
+            print('Please input anything such as:\n')
+            for f in files:
+                print('- %s' % f)
+            print('\n')
 
     if argments['-s']:
         arg = argments['<script>']
