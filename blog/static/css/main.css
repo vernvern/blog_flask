@@ -13,3 +13,16 @@
 
 #main_board{
     }
+
+ul.page{
+
+    font-size: 16px;
+}
+
+li.page{
+    margin: 5px;
+}
+
+body{
+    color: rgba(0, 0, 0, 0.6);
+}
