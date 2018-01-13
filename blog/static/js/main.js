@@ -8,10 +8,7 @@ $("[href='#article']").click(function(){
             var date = new Date(v.date_create);
             date = date.getFullYear() + '-' +
                 (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-' +
-                date.getDate() + ' ' +
-                date.getHours() + ':' +
-                date.getMinutes() + ':' +
-                date.getSeconds();
+                date.getDate();
             date = "<span class='date'>" + date + '</span>'
             var page ="<a>" + v.title + "</a>"
             var li = '<li class="page" id="' + v.id + '">' + date + page + "</li>"
