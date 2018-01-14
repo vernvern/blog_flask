@@ -27,7 +27,6 @@ def http(rule=None, **options):
 
         # 具体路径
         rule = os.path.join(profix, rule)
-        print(rule)
 
         # 写路由
         endpoint = options.pop('endpoint', None)
