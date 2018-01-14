@@ -26,5 +26,5 @@ def get_page_list(keyword=None):
 def get_page_detail(id_):
     page = db.session.query(Page).filter_by(id=id_).first()
     data = page._todict()
-    data['body'] = markdown.markdown(data['body'], extenstions=EXTENSTIONS)
+    data['body'] = markdown.markdown(data['body'], extensions=EXTENSTIONS)
     return {'data': data}
