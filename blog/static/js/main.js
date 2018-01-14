@@ -27,12 +27,18 @@ function show_page(id){
     },
     function(ret)
     {
-        $(".modal-body").text("");
         var title = ret.data.title;
         var body = ret.data.body;
         var date_create = ret.data.date_create;
         var date_modify = ret.data.date_modify;
-        $(".modal-body").append(title + ":" + body)
+
+        // title
+        $(".modal-title").text("");
+        $(".modal-title").append(title);
+
+        // body
+        $(".modal-body").text("");
+        $(".modal-body").append(body)
     });
 
     $('#myModal').modal('show');
