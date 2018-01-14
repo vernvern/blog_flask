@@ -6,3 +6,19 @@
     - title: 标题
       id: 123123
       body: asd1
+    - title: markdown文章测试
+      id: 123123123
+      body: |
+        # markdown文章测试
+        ## 二级标题
+        -------
+        `标记`
+
+        **加粗**
+
+        test1 | test2
+
+        --- | ---
+
+        data1 | data2
+

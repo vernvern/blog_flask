@@ -13,6 +13,10 @@ class TestCasePage(unittest.TestCase):
         for data in ret['data']:
             self.assertTrue(self.keyword in data['title'])
 
+    def test_get_page_detail(self):
+        ret = modules_page.get_page_detail(123123123)
+        self.assertTrue(isinstance(ret['data'], dict))
+
 
 if __name__ == '__main':
     unittest.main()
