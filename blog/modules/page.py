@@ -18,6 +18,7 @@ def get_page_list(keyword=None):
     if keyword:
         patern = '%' + str(keyword) + '%'
         pages = pages.filter(Page.title.like(patern))
+        pages.order_by(Page.date_create.desc())
 
     return {'data': [p._todict() for p in pages]}
 
