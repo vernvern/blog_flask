@@ -49,6 +49,7 @@ def get_simple_page_list(index=1, size=20):
             sd_sd_title = re.search('(\#\#.*\#\#{1})', page.body, re.S)
             if sd_sd_title:
                 page.body = page.body[:sd_sd_title.span()[1] - 2]
+        page.body = markdown.markdown(page.body, extensions=EXTENSTIONS)
     return {'data': [p._todict() for p in pages],
             'index': index,
             'size': size,
