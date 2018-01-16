@@ -1,3 +1,4 @@
+
 $("[href='#article']").click(function(){
     $.post('http://127.0.0.1:5000/api/page/get_page_list',
     {},
@@ -44,3 +45,12 @@ function show_page(id){
     $('#myModal').modal('show');
 }
 
+function get_simple_page_list(index=1, value=20){
+    $.post('http://127.0.0.1:5000/api/page/get_simple_page_list', {
+        index: index,
+        value: value},
+    function(ret){
+        alert(123);})}
+
+
+$(get_simple_page_list(1, 20))

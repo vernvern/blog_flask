@@ -24,6 +24,6 @@ def get_page_detail():
 
 @http(methods=['POST'])
 def get_simple_page_list():
-    index = request.form.get('index', 1)
-    size = request.form.get('size', 20)
+    index = int(request.form.get('index', 1))
+    size = int(request.form.get('size', 20))
     return page.get_simple_page_list(index, size)
