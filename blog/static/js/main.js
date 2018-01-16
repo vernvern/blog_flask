@@ -48,9 +48,35 @@ function show_page(id){
 function get_simple_page_list(index=1, value=20){
     $.post('http://127.0.0.1:5000/api/page/get_simple_page_list', {
         index: index,
-        value: value},
+        value: value
+    },
     function(ret){
-        alert(123);})}
+        var div_list = "";
+        pages = ret.data;
+        for(var i=0;i<pages.length;i++){
+            var div = '<div class="panel panel-default">' +
+                      '<div class="panel-heading" role="tab" id="' + pages[i].id + '">' +
+                      '<h4 class="panel-title">' +
+                      '<a role="button" data-toggle="collapse" ' +
+                      'data-parent="#accordion" href="#collapse' +
+                      pages[i].id +
+                      '" aria-expanded=' + (i == 0 ? '"true"' : '"false"') +
+                      ' aria-controls="collapse' + pages[i].id + '">' +
+                      pages[i].title + '</a></h4></div>' +
+                      '<div id="collapse' + pages[i].id + '" ' +
+                      'class="panel-collapse collapse ' +
+                      (i==0 ? 'in"' : '') +
+                      ' role="tabpanel" ' +
+                      'aria-labelledby="heading' + pages[i].id + '">' +
+                      '<div class="panel-body">' +
+                      pages[i].body + '</div></div></div>'
+            div_list = div_list + div;
+        };
+        $("#accordion").text("");
+        $("#accordion").append(div_list);
+    })}
 
 
-$(get_simple_page_list(1, 20))
+$(function(){
+    get_simple_page_list(1, 20)
+})
