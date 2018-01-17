@@ -15,14 +15,14 @@ EXTENSTIONS = ['markdown.extensions.extra',
 
 
 def get_page_list(keyword=None):
-    pages = db.session.query(Page).filter_by(is_show=True)
+    pages = db.session.query(Page).filter_by(is_show=True) \
+                      .order_by(Page.date_create.desc())
 
     if keyword:
         patern = '%' + str(keyword) + '%'
         pages = pages.filter(Page.title.like(patern))
-        pages.order_by(Page.date_create.desc())
 
-    return {'data': [p._todict() for p in pages]}
+    return {'data': [p._todict() for p in pages.all()]}
 
 
 def get_page_detail(id_):
