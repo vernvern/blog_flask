@@ -63,14 +63,20 @@ function get_simple_page_list(index=1, value=20){
                       pages[i].id +
                       '" aria-expanded=' + (i == 0 ? '"true"' : '"false"') +
                       ' aria-controls="collapse' + pages[i].id + '">' +
-                      pages[i].title + '</a></h4></div>' +
+                      pages[i].title + '</a>' +
+                      '</h4></div>' +
                       '<div id="collapse' + pages[i].id + '" ' +
                       'class="panel-collapse collapse ' +
                       (i==0 ? 'in"' : '') +
                       ' role="tabpanel" ' +
                       'aria-labelledby="heading' + pages[i].id + '">' +
                       '<div class="panel-body">' +
-                      pages[i].body + '</div></div></div>'
+                      pages[i].body + '</br></br>' +
+                      '<center>.</center>' +
+                      '<center>.</center>' +
+                      '<center>.</center></br>' +
+                      '<center><a class="show_detail" href="javascript:void(0);" onclick="show_page(id)" id="' + pages[i].id + '">查看全文</a></center>' +
+                      '</div></div></div>'
             div_list = div_list + div;
         };
         $("#accordion").text("");
