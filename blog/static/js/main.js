@@ -55,7 +55,8 @@ function get_simple_page_list(index=1, value=20){
         pages = ret.data;
         for(var i=0;i<pages.length;i++){
             var div = '<div class="panel panel-default">' +
-                      '<div class="panel-heading" role="tab" id="' + pages[i].id + '">' +
+                      '<div class="panel-heading panel_heading"' +
+                      ' role="tab" id="' + pages[i].id + '">' +
                       '<h4 class="panel-title">' +
                       '<a role="button" data-toggle="collapse" ' +
                       'data-parent="#accordion" href="#collapse' +
