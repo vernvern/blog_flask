@@ -1,4 +1,4 @@
-
+// artile - 事件 - 文章标题列表
 $("[href='#article']").click(function(){
     $.post('http://127.0.0.1:5000/api/page/get_page_list',
     {},
@@ -23,6 +23,8 @@ $("[href='#article']").click(function(){
     })
 });
 
+
+// index/artice - 事件 - 文章详情
 function show_page(id){
     $.post('http://127.0.0.1:5000/api/page/get_page_detail',
     {
@@ -47,13 +49,16 @@ function show_page(id){
     $('#myModal').modal('show');
 }
 
+
+// index - func - 文章简要列表
 function get_simple_page_list(index=1, value=20){
+    var accordion = "accordion" + index;
     $.post('http://127.0.0.1:5000/api/page/get_simple_page_list', {
         index: index,
         value: value
     },
     function(ret){
-        var div_list = "";
+        var div_list = "";  // 文章简要
         pages = ret.data;
         for(var i=0;i<pages.length;i++){
             var div = '<div class="panel panel-default">' +
@@ -61,7 +66,7 @@ function get_simple_page_list(index=1, value=20){
                       ' role="tab" id="' + pages[i].id + '">' +
                       '<h4 class="panel-title">' +
                       '<a role="button" data-toggle="collapse" ' +
-                      'data-parent="#accordion" href="#collapse' +
+                      'data-parent="' + accordion + '" href="#collapse' +
                       pages[i].id +
                       '" aria-expanded=' + (i == 0 ? '"true"' : '"false"') +
                       ' aria-controls="collapse' + pages[i].id + '">' +
@@ -69,7 +74,7 @@ function get_simple_page_list(index=1, value=20){
                       '</h4></div>' +
                       '<div id="collapse' + pages[i].id + '" ' +
                       'class="panel-collapse collapse ' +
-                      (i==0 ? 'in"' : '') +
+                      (index==1 ? (i==0 ? 'in"' : '') : '') +
                       ' role="tabpanel" ' +
                       'aria-labelledby="heading' + pages[i].id + '">' +
                       '<div class="panel-body">' +
@@ -81,11 +86,22 @@ function get_simple_page_list(index=1, value=20){
                       '</div></div></div>'
             div_list = div_list + div;
         };
-        $("#accordion").text("");
-        $("#accordion").append(div_list);
+        var more = '<div class="panel-group" id="accordion' + (index - 0 + 1) + '" role="tablist" aria-multiselectable="true"></div>';
+
+        $("#" + accordion).append(div_list);
+        $("#" + accordion).after(more);
+
+        $("#show_more_article").attr("value", index - 0 + 1);
     })}
 
-
+// index - 事件 - 加载完页面触发
 $(function(){
     get_simple_page_list(1, 20)
 })
+
+// index - 事件 - 查看更多
+$("#show_more_article").click(function(){
+    var index = $("#show_more_article").attr("value");
+    get_simple_page_list(index, 20);
+
+});
