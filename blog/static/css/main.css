@@ -26,15 +26,3 @@ li.page{
 body{
     color: rgba(0, 0, 0, 0.6);
 }
-
-.panel-default>.panel_heading{
-    background-color: white;
-}
-
-
-a{
-    color: #139fa2;
-}
-
-a.show_detail{
-}

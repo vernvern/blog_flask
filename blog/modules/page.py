@@ -1,7 +1,5 @@
 # -*- coding:utf-8 -*-
 
-import re
-
 import markdown
 
 from blog import db
@@ -15,14 +13,14 @@ EXTENSTIONS = ['markdown.extensions.extra',
 
 
 def get_page_list(keyword=None):
-    pages = db.session.query(Page).filter_by(is_show=True) \
-                      .order_by(Page.date_create.desc())
+    pages = db.session.query(Page)
 
     if keyword:
         patern = '%' + str(keyword) + '%'
         pages = pages.filter(Page.title.like(patern))
+        pages.order_by(Page.date_create.desc())
 
-    return {'data': [p._todict() for p in pages.all()]}
+    return {'data': [p._todict() for p in pages]}
 
 
 def get_page_detail(id_):
@@ -30,27 +28,3 @@ def get_page_detail(id_):
     data = page._todict()
     data['body'] = markdown.markdown(data['body'], extensions=EXTENSTIONS)
     return {'data': data}
-
-
-def get_simple_page_list(index=1, size=20):
-    ''' 获取带简略信息的文章列表 '''
-    pages = db.session.query(Page) \
-              .filter_by(is_show=True) \
-              .order_by(Page.date_create.desc())
-
-    total = pages.count()
-
-    pages = pages.slice((index - 1) * size, index * size).all()
-    for page in pages:
-        toc = re.search('\[TOC\]', page.body, re.S)
-        if toc:
-            page.body = page.body[:toc.span()[1]]
-        else:
-            sd_sd_title = re.search('(\#\#.*\#\#{1})', page.body, re.S)
-            if sd_sd_title:
-                page.body = page.body[:sd_sd_title.span()[1] - 2]
-        page.body = markdown.markdown(page.body, extensions=EXTENSTIONS)
-    return {'data': [p._todict() for p in pages],
-            'index': index,
-            'size': size,
-            'total': total}
