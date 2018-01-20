@@ -82,7 +82,8 @@ function get_simple_page_list(index=1, value=20){
                       '<center>.</center>' +
                       '<center>.</center>' +
                       '<center>.</center></br>' +
-                      '<center><a class="show_detail" href="javascript:void(0);" onclick="show_page(id)" id="' + pages[i].id + '">查看全文</a></center>' +
+                      '<center><a class="show_detail" href="javascript:void(0);" onclick="show_page(id)" id="' +
+                      pages[i].id + '">查看全文</a></center>' +
                       '</div></div></div>'
             div_list = div_list + div;
         };
