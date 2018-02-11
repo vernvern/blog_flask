@@ -2,7 +2,25 @@ import inspect
 import os.path
 import functools
 
+from flask import request
+
 from blog import app
+
+
+def log(func, rule, **options):
+    @functools.wraps(func)
+    def wrapper(*args, **kw):
+        ret = func(*args, **kw)
+        print(dir(request))
+        print('[API] %s' % rule)
+        print('[Methods] %s' % request.method)
+        print('[args:] :')
+        if request.method == 'POST':
+            [print('    %s: %s' % (k, v)) for k, v in request.form.items()]
+        elif request.method == 'GET':
+            [print('    %s: %s' % (k, v)) for k, v in request.args.items()]
+        return ret
+    return wrapper
 
 
 def http(rule=None, **options):
@@ -30,7 +48,7 @@ def http(rule=None, **options):
 
         # 写路由
         endpoint = options.pop('endpoint', None)
-        app.add_url_rule(rule, endpoint, func, **options)
+        app.add_url_rule(rule, endpoint, log(func, rule, **options), **options)
         return func
 
     return decorator

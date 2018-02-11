@@ -6,7 +6,6 @@ urls = '/'
 
 
 @http('/')
-@http('/index')
 def index():
     return render_template('index.html')
 
