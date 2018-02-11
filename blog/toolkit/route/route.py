@@ -13,13 +13,14 @@ def log(func, rule, **options):
         ret = func(*args, **kw)
         log = '\n[API] %s\n' % rule
         log += '[Methods] %s\n' % request.method
-        log += '[args]:\n'
+        log += '[Args]:\n'
         if request.method == 'POST':
             args = ['    %s: %s' % (k, v) for k, v in request.form.items()]
             log += '\n'.join(args)
         elif request.method == 'GET':
             args = ['    %s: %s' % (k, v) for k, v in request.args.items()]
             log += '\n'.join(args)
+        # 调用接口 log
         app.logger.info(log)
         return ret
     return wrapper

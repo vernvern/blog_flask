@@ -3,6 +3,10 @@ import logging
 
 from flask import Flask, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask import request
+
+
+app = Flask(__name__)
 
 
 class MyResponse(Response):
@@ -24,6 +28,15 @@ class MyResponse(Response):
             if not response.get('total', False):
                 response['total'] = len(response['data'])
 
+            log = '[Methods] %s\n' % request.method
+            log += '[Log Level] into_200'
+            log += '[Return Args]:\n'
+            args = ['    %s: %s' % (k, v) for k, v in response.items()]
+            log += '\n'.join(args)
+
+            # 返回参数日志 info_200
+            app.logger.info(log)
+
             response = jsonify(response)
         return super(Response, cls).force_type(response, environ)
 
@@ -34,7 +47,6 @@ formatter = logging.Formatter(
         '\n\n\n------------------------- \n'
         '%(levelname)s %(asctime)s \n %(message)s')
 handler.setFormatter(formatter)
-app = Flask(__name__)
 
 # return format
 app.response_class = MyResponse
