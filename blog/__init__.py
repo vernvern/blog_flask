@@ -5,6 +5,7 @@ from flask import Flask, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 
+from . import settings
 
 app = Flask(__name__)
 
@@ -42,7 +43,7 @@ class MyResponse(Response):
 
 
 # log
-handler = logging.FileHandler('./blog_info.log', encoding='UTF-8')
+handler = logging.FileHandler(settings.LOG_ADDRESS, encoding='UTF-8')
 formatter = logging.Formatter(
         '\n\n\n------------------------- \n'
         '%(levelname)s %(asctime)s \n %(message)s')
@@ -52,7 +53,7 @@ handler.setFormatter(formatter)
 app.response_class = MyResponse
 
 # sqlalchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
