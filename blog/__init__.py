@@ -1,13 +1,13 @@
 import time
 
 from flask import Flask
-from flask import request
 
 
 app = Flask(__name__)
 
 # 加载配置
 import blog.settings
+
 # 数据库对象
 from blog.settings import db
 

@@ -1,6 +1,7 @@
 import inspect
 import os.path
 import functools
+import logging
 
 from flask import request
 
@@ -11,14 +12,15 @@ def log(func, rule, **options):
     @functools.wraps(func)
     def wrapper(*args, **kw):
         ret = func(*args, **kw)
-        log = '\n[API] %s\n' % rule
-        log += '[Methods] %s\n' % request.method
-        log += '[Args]:\n'
-        if request.method == 'POST':
+        log = '[API] %s\n' % rule
+        log += '[Func] %s: %s' % (func.__module__, func.__name__)
+        if request.method == 'POST' and request.form.keys():
             args = ['    %s: %s' % (k, v) for k, v in request.form.items()]
+            log += '\n[Args]\n'
             log += '\n'.join(args)
-        elif request.method == 'GET':
+        elif request.method == 'GET' and dict(request.args.keys()):
             args = ['    %s: %s' % (k, v) for k, v in request.args.items()]
+            log += '\n[Args]\n'
             log += '\n'.join(args)
         # 调用接口 log
         app.logger.info(log)
