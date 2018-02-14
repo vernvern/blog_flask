@@ -2,6 +2,7 @@
 import sys
 import arrow
 import logging
+import functools
 
 from flask import Response, jsonify, request
 
@@ -50,6 +51,34 @@ info_console_handler.setFormatter(formatter)
 # 添加handler
 app.logger.addHandler(info_file_handler)
 app.logger.addHandler(info_console_handler)
+
+
+def request_log(func, rule, **options):
+    ''' api 请求日志
+    '''
+    @functools.wraps(func)
+    def wrapper(*args, **kw):
+        ret = func(*args, **kw)
+        log = '[API] %s\n' % rule
+        log += '[Func] %s: %s\n' % (func.__module__, func.__name__)
+        log += '[Methods] %s\n' % request.method
+        if request.method == 'POST' and request.form.keys():
+            args = ['    %s: %s' % (k, v) for k, v in request.form.items()]
+            log += '[Args]\n'
+            log += '\n'.join(args)
+        elif request.method == 'GET' and dict(request.args.keys()):
+            args = ['    %s: %s' % (k, v) for k, v in request.args.items()]
+            log += '[Args]\n'
+            log += '\n'.join(args)
+        # 调用接口 log
+        app.logger.info(log)
+        return ret
+    return wrapper
+
+
+# api 200 日志
+
+# api 500 日志
 
 
 # --------------------   views函数返回python对象时，处理成json格式
