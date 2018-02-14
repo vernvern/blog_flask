@@ -98,6 +98,11 @@ def log_api_200(response):
 
 
 class MyResponse(Response):
+    ''' view返回处理
+
+    1、view 返回dict的时候，转换成json
+    2、记录返回json日志
+    '''
     @classmethod
     def force_type(cls, response, environ=True):
         if isinstance(response, dict):
