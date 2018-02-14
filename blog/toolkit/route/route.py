@@ -13,14 +13,15 @@ def log(func, rule, **options):
     def wrapper(*args, **kw):
         ret = func(*args, **kw)
         log = '[API] %s\n' % rule
-        log += '[Func] %s: %s' % (func.__module__, func.__name__)
+        log += '[Func] %s: %s\n' % (func.__module__, func.__name__)
+        log += '[Methods] %s\n' % request.method
         if request.method == 'POST' and request.form.keys():
             args = ['    %s: %s' % (k, v) for k, v in request.form.items()]
-            log += '\n[Args]\n'
+            log += '[Args]\n'
             log += '\n'.join(args)
         elif request.method == 'GET' and dict(request.args.keys()):
             args = ['    %s: %s' % (k, v) for k, v in request.args.items()]
-            log += '\n[Args]\n'
+            log += '[Args]\n'
             log += '\n'.join(args)
         # 调用接口 log
         app.logger.info(log)
