@@ -53,14 +53,14 @@ app.logger.addHandler(info_file_handler)
 app.logger.addHandler(info_console_handler)
 
 
-def request_log(func, rule, **options):
+def log_request(func, rule, **options):
     ''' api 请求日志
     '''
     @functools.wraps(func)
     def wrapper(*args, **kw):
         ret = func(*args, **kw)
-        log = '[API] %s\n' % rule
-        log += '[Func] %s: %s\n' % (func.__module__, func.__name__)
+        log = '[API] %s\n' % request.path
+        log += '[Func] %s.%s\n' % (func.__module__, func.__name__)
         log += '[Methods] %s\n' % request.method
         if request.method == 'POST' and request.form.keys():
             args = ['    %s: %s' % (k, v) for k, v in request.form.items()]
@@ -76,7 +76,16 @@ def request_log(func, rule, **options):
     return wrapper
 
 
-# api 200 日志
+def log_api_200(response, message):
+    ''' api 200 日志
+    '''
+    log = '[API] %s\n' % request.path
+    log += '[Methods] %s\n' % request.method
+    log += '[HTTP Code] %s\n' % response.status_code
+    log += '[Return]\n'
+    log += message
+    return log
+
 
 # api 500 日志
 
@@ -103,17 +112,16 @@ class MyResponse(Response):
             if not response.get('total', False):
                 response['total'] = 0
 
-            log = '[Methods] %s\n' % request.method
-            log += '[HTTP Code] 200\n'
-            log += '[Return]:\n'
             args = ['    %s: %s' % (k, v) for k, v in response.items()]
-            log += '\n'.join(args)
-            log += '\n'
-
-            # 返回参数日志 info_200
-            app.logger.info(log)
+            message = '\n'.join(args)
 
             response = jsonify(response)
+
+            message = log_api_200(response, message)
+
+            # 返回参数日志 info_200
+            app.logger.info(message)
+
         return super(Response, cls).force_type(response, environ)
 
 
