@@ -76,15 +76,19 @@ def log_request(func, rule, **options):
     return wrapper
 
 
-def log_api_200(response, message):
+def log_api_200(response):
     ''' api 200 日志
     '''
     log = '[API] %s\n' % request.path
     log += '[Methods] %s\n' % request.method
-    log += '[HTTP Code] %s\n' % response.status_code
+    log += '[HTTP Code] 200\n'
     log += '[Return]\n'
+    args = ['    %s: %s' % (k, v) for k, v in response.items()]
+    message = '\n'.join(args)
     log += message
-    return log
+
+    app.logger.info(message)
+    return
 
 
 # api 500 日志
@@ -112,15 +116,9 @@ class MyResponse(Response):
             if not response.get('total', False):
                 response['total'] = 0
 
-            args = ['    %s: %s' % (k, v) for k, v in response.items()]
-            message = '\n'.join(args)
+            log_api_200(response)  # 200 日志
 
             response = jsonify(response)
-
-            message = log_api_200(response, message)
-
-            # 返回参数日志 info_200
-            app.logger.info(message)
 
         return super(Response, cls).force_type(response, environ)
 
