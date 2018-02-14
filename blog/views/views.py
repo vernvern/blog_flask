@@ -1,6 +1,7 @@
 from flask import render_template
 
 from blog.toolkit.route.route import http
+from blog import app
 
 urls = '/'
 
@@ -15,6 +16,7 @@ def test1():
     return 'hello world1'
 
 
-@http()
-def test2():
-    return {'data': []}
+@app.errorhandler(500)
+def raise_error(e):
+    app.logger.exception(e)
+    return '500', 500

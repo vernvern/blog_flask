@@ -17,14 +17,16 @@ for tmp_handler in app.logger.handlers:
     app.logger.removeHandler(tmp_handler)
 
 # 设置日志级别
-if not app.debug and app.config['LOG_LEVEL']:
+if app.config['LOG_LEVEL']:
     app.logger.setLevel(app.config['LOG_LEVEL'])
 
 
 # 自定义filter
 class AppFilter(logging.Filter):
     def filter(self, record):
-        record.datetime = arrow.now().to('08:00').for_json()
+        record.Api = '[API] %s' % request.path
+        record.Method = '[Method] %s' % request.method
+        record.datetime = '[DateTime] %s' % arrow.now().to('08:00').for_json()
         return True
 
 
@@ -32,8 +34,8 @@ app_filter = AppFilter()
 
 # 日志输入formatter
 formatter = logging.Formatter(
-        '\n[Level] %(levelname)s\n[DateTime] %(datetime)s\n' +
-        '%(message)s\n')
+        '\n[Level] %(levelname)s\n%(datetime)s\n' +
+        '%(Api)s\n%(Method)s\n%(message)s\n')
 
 # info 文件日志
 info_file_handler = logging.FileHandler(app.config['LOG_INFO_FILE_PATH'],
@@ -59,9 +61,7 @@ def log_request(func, rule, **options):
     @functools.wraps(func)
     def wrapper(*args, **kw):
         ret = func(*args, **kw)
-        log = '[API] %s\n' % request.path
-        log += '[Func] %s.%s\n' % (func.__module__, func.__name__)
-        log += '[Methods] %s\n' % request.method
+        log = '[Func] %s.%s\n' % (func.__module__, func.__name__)
         if request.method == 'POST' and request.form.keys():
             args = ['    %s: %s' % (k, v) for k, v in request.form.items()]
             log += '[Args]\n'
@@ -79,9 +79,7 @@ def log_request(func, rule, **options):
 def log_api_200(response):
     ''' api 200 日志
     '''
-    log = '[API] %s\n' % request.path
-    log += '[Methods] %s\n' % request.method
-    log += '[HTTP Code] 200\n'
+    log = '[HTTP Code] 200\n'
     log += '[Return]\n'
     args = ['    %s: %s' % (k, v) for k, v in response.items()]
     message = '\n'.join(args)
