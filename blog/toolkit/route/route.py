@@ -1,8 +1,7 @@
-import inspect
 import os.path
-import functools
 
 from blog import app
+from blog.settings import log_request
 
 
 def http(rule=None, **options):
@@ -30,7 +29,8 @@ def http(rule=None, **options):
 
         # 写路由
         endpoint = options.pop('endpoint', None)
-        app.add_url_rule(rule, endpoint, func, **options)
+        app.add_url_rule(
+            rule, endpoint, log_request(func, rule, **options), **options)
         return func
 
     return decorator
