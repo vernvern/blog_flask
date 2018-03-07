@@ -17,6 +17,7 @@ tags:
 
 ## 初始化
 
+[TOC]
 
 ### github准备工作
 - 安装git

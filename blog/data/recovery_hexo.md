@@ -1,11 +1,9 @@
 ---
 
 title: 恢复hexo环境
-date: 2017/08/02 23:17:12
+date_created: 2017/08/02 23:17:12
 categories: hexo
-updated: 2017/08/03 00:06:12
 comments: true
-toc: true
 
 ---
 
@@ -14,6 +12,8 @@ toc: true
 ## 导读
 前段时间重装了系统，但是忘记了怎么部署hexo了。。。。
 随手记录如何恢复案发现场～
+
+[TOC]
 
 ## 经过
 

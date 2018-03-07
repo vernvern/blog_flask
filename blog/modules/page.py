@@ -57,15 +57,12 @@ def get_page_list(mode='title'):
 
             # 返回title和body头部
             elif mode == 'simple':
-                toc = re.search('\[TOC\]', body, re.S)
-                if toc:
-                    body = body[:toc.span()[1]]
-                else:
-                    preview = re.search(r'\#\#.*\#\#', body, re.S | re.M)
-                    if preview:
-                        body = preview.group()[:-2]
-                # print('\n\n\n', body, '\n', '-'*20)
                 body = markdown.markdown(body, extensions=EXTENSTIONS)
+                preview = re.search(r'<div class="toc">\n<ul>.*</ul>\n</div>',
+                                    body, re.S | re.M)
+                if preview:
+                    body = body[:preview.span()[1]]
+                    print('\n\n\n', body, '\n', '-'*20)
                 page['body'] = body
 
             page_list.append(page)

@@ -4,7 +4,6 @@ date: 2017/06/10 14:52:00
 categories: python
 updated: 2017/06/10 14:52:00
 comments: true
-toc: true
 
 tags:
 - django
@@ -13,6 +12,8 @@ tags:
 ---
 
 ## quickly start sphinx
+
+[TOC]
 
 ### 安装sphinx
 就是这么简单：

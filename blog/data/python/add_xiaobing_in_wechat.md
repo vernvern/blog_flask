@@ -22,7 +22,7 @@ tags:
 
 另重点感谢github的[yanwii](https://github.com/yanwii/), 实现这个功能其中一个关键点是使用了他github库的[微软小冰微博api](https://github.com/yanwii/msxiaoiceapi)
 
-
+[TOC]
 
 ## 搭建运行环境
 1. 以下二选一：
