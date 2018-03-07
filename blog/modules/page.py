@@ -21,8 +21,10 @@ def split_meta(string):
 
     return meta, body
     '''
-    ret_meta = {'date_created': '居然忘记写',
-                'tags': []}
+    ret_meta = {'date_created': '1970-01-01T08:00:00+08:00',
+                'date_modified': '1970-01-01T08:00:00+08:00',
+                'tags': [],
+                'sort': '未分类'}
 
     match = re.match(r'-{3,}.*-{3,}', string, re.M | re.S)
     if match:
@@ -39,16 +41,19 @@ def split_meta(string):
 
 def get_page_list(mode='title', index=1, size=20):
     page_path_list = glob.glob(PAGE_PATH + '**/*.md', recursive=True)
+    total = len(page_path_list)
     page_list = []
     for page_path in page_path_list:
-        file_name = page_path.split('/')[-1][:-3]
-        date_modified = arrow.get(os.stat(page_path).st_mtime).for_json()
+        path_split = page_path.split('/')
+        file_name = path_split[-1][:-3]
         with open(page_path, 'r') as f:
             meta, body = split_meta(f.read())
             title = meta['title'] if meta.get('title', False) else file_name
-            page = {'date_modified': date_modified,
-                    'title': title,
+            page = {'title': title,
                     'name': file_name}
+            page.update(meta)
+            if path_split[-2] != 'data':
+                page['sort'] = path_split[-2]
 
             # 只返回title
             if mode == 'title':
@@ -67,10 +72,10 @@ def get_page_list(mode='title', index=1, size=20):
     page_list = sorted(
             page_list, key=lambda x: x['date_modified'], reverse=True)
 
-    total = len(page_list)
-    start = size * (index - 1)
-    end = start + size
-    page_list = page_list[start:end]
+    if mode != 'title':
+        start = size * (index - 1)
+        end = start + size
+        page_list = page_list[start:end]
 
     return {'data': page_list, 'total': total, 'index': index, 'size': size}
 
