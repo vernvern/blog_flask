@@ -6,8 +6,6 @@ install:
     - pip install -r requirements.txt
 
 script:
-    - python manage.py db create
-    - python manage.py load_data
     - coverage run --source=blog -m unittest discover
 
 
