@@ -13,6 +13,7 @@ EXTENSTIONS = ['markdown.extensions.extra',
                'markdown.extensions.codehilite',
                'markdown.extensions.tables',
                'markdown.extensions.toc']
+PAGE_PATH = 'blog/data/'
 
 
 def split_meta(string):
@@ -37,28 +38,38 @@ def split_meta(string):
 
 
 def get_page_list(keyword=None):
-    page_path_list = glob.glob('blog/data/**/*.md', recursive=True)
+    page_path_list = glob.glob(PAGE_PATH + '**/*.md', recursive=True)
     page_list = []
     for page_path in page_path_list:
-        title = page_path.split('/')[-1][:-3]
+        file_name = page_path.split('/')[-1][:-3]
         date_modified = arrow.get(os.stat(page_path).st_mtime).for_json()
         with open(page_path, 'r') as f:
             meta, _ = split_meta(f.read())
-            title = meta['title'] if meta.get('title', False) else title
+            title = meta['title'] if meta.get('title', False) else file_name
             page = {'date_modified': date_modified,
-                    'title': title}
+                    'title': title,
+                    'name': file_name}
             page_list.append(page)
-    page_list = sorted(page_list, key=lambda x: x['date_modified'], reverse=True)
+    page_list = sorted(
+            page_list, key=lambda x: x['date_modified'], reverse=True)
 
     return page_list
 
 
-def get_page_detail(id_):
-    # page = db.session.query(Page).filter_by(id=id_).first()
-    # data = page._todict()
-    # data['body'] = markdown.markdown(data['body'], extensions=EXTENSTIONS)
-    # return {'data': data}
-    return {}
+def get_page_detail(name):
+    page_path = glob.glob(PAGE_PATH + '**/' + name + '.md', recursive=True)[0]
+    date_modified = arrow.get(os.stat(page_path).st_mtime).for_json()
+    with open(page_path, 'r') as f:
+        meta, body = split_meta(f.read())
+        title = meta['title'] if meta.get('title', False) else file_name
+        page = {'date_modified': date_modified,
+                'date_created': meta['date_created'],
+                'title': title,
+                'name': name,
+                'body': markdown.markdown(body, extensions=EXTENSTIONS)}
+        return page
+
+    raise Exception('居然找不到')
 
 
 def get_simple_page_list(index=1, size=20):

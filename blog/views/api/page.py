@@ -19,8 +19,9 @@ def get_page_list():
 
 @http(methods=['POST'])
 def get_page_detail():
-    id_ = request.form['id']
-    return page.get_page_detail(id_)
+    name = request.form['name']
+    data = page.get_page_detail(name)
+    return {'data': data}
 
 
 @http(methods=['POST'])

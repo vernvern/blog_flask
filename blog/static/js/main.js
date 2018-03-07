@@ -13,7 +13,7 @@ $("[href='#article']").click(function(){
                 (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-' +
                 date.getDate();
             date = "<span class='date'>" + date + '</span>'
-            var page ='<a class="page" href="javascript:void(0);" onclick="show_page(id)">' + page.title + "</a>"
+            var page ='<a class="page" href="javascript:void(0);" onclick="show_page(name)" name=' + page.name + '>' + page.title + "</a>"
             var li = '<li class="page' + '">' + date + page + "</li>"
             insert = insert + li
         }
@@ -25,10 +25,10 @@ $("[href='#article']").click(function(){
 
 
 // index/artice - 事件 - 文章详情
-function show_page(id){
+function show_page(name){
     $.post('http://127.0.0.1:5000/api/page/get_page_detail',
     {
-        id: id
+        name: name
     },
     function(ret)
     {

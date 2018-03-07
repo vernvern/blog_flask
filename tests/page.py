@@ -42,14 +42,14 @@ tags:
     测试
             '''
 
+        # test_get_page_detail
+        self.page_name = 'add_xiaobing_in_wechat'
+
     def test_get_page_list(self):
         ret = modules_page.get_page_list(self.keyword)
-        # for data in ret['data']:
-        #     self.assertTrue(self.keyword in data['title'])
 
-    # def test_get_page_detail(self):
-    #     ret = modules_page.get_page_detail(123123123)
-    #     self.assertTrue(isinstance(ret['data'], dict))
+    def test_get_page_detail(self):
+        ret = modules_page.get_page_detail(self.page_name)
 
 
 if __name__ == '__main':
