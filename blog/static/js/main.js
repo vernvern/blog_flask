@@ -8,12 +8,12 @@ $("[href='#article']").click(function(){
         var pages = ret.data
         for(i=0; i<pages.length; i++){
             var page = pages[i];
-            var date = new Date(page.date_create);
+            var date = new Date(page.date_modified);
             date = date.getFullYear() + '-' +
                 (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-' +
                 date.getDate();
             date = "<span class='date'>" + date + '</span>'
-            var page ='<a class="page" href="javascript:void(0);" onclick="show_page(id)"' + ' id="' + page.id + '">' + page.title + "</a>"
+            var page ='<a class="page" href="javascript:void(0);" onclick="show_page(id)">' + page.title + "</a>"
             var li = '<li class="page' + '">' + date + page + "</li>"
             insert = insert + li
         }

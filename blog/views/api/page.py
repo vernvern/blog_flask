@@ -12,8 +12,9 @@ urls = 'api/page'
 @http(methods=['POST'])
 def get_page_list():
     keyword = request.form.get('keyword', None)
-    ret = page.get_page_list(keyword)
-    return ret
+    page_list = page.get_page_list(keyword)
+
+    return {'data': page_list}
 
 
 @http(methods=['POST'])
