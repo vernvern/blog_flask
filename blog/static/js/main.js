@@ -72,6 +72,10 @@ function get_simple_page_list(index=1, value=20){
                       '<div id=' + pages[i].name + ' class="panel-collapse collapse ' + (i==0?'in':'') + '" role="tabpanel" aria-labelledby="heading_' + pages[i].name + '">' +
                       '<div class="panel-body">' +
                       pages[i].body +
+                      '<center>.</center>' +
+                      '<center>.</center>' +
+                      '<center>.</center></br>' +
+                      '<center><a class="show_detail" href="javascript:void(0);" onclick="show_page(name)" name="' + pages[i].name + '">查看全文</a></center>' +
                       '</div>' +
                       '</div>' +
                       '</div>';
