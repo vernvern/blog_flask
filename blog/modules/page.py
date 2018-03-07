@@ -43,13 +43,12 @@ def get_page_list(keyword=None):
         title = page_path.split('/')[-1][:-3]
         date_modified = arrow.get(os.stat(page_path).st_mtime).for_json()
         with open(page_path, 'r') as f:
-            meta, body = split_meta(f.read())
+            meta, _ = split_meta(f.read())
             title = meta['title'] if meta.get('title', False) else title
-            page = {'date_created': meta['date_created'],
-                    'date_modified': date_modified,
-                    'title': title,
-                    'body': body}
+            page = {'date_modified': date_modified,
+                    'title': title}
             page_list.append(page)
+    page_list = sorted(page_list, key=lambda x: x['date_modified'], reverse=True)
 
     return page_list
 
