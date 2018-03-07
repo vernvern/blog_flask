@@ -5,7 +5,6 @@ date: 2017/08/10 21:30:21
 categories: test
 updated: 2017/08/10 21:30:12
 comments: true
-toc: true
 
 tags:
 - test
@@ -20,7 +19,7 @@ tags:
 
 ## !@#$%^&*
 
-
+[TOC]
 
 ## 参考文献
 

@@ -37,23 +37,42 @@ def split_meta(string):
     return ret_meta, body
 
 
-def get_page_list(keyword=None):
+def get_page_list(mode='title'):
     page_path_list = glob.glob(PAGE_PATH + '**/*.md', recursive=True)
+    total = len(page_path_list)
     page_list = []
     for page_path in page_path_list:
         file_name = page_path.split('/')[-1][:-3]
         date_modified = arrow.get(os.stat(page_path).st_mtime).for_json()
         with open(page_path, 'r') as f:
-            meta, _ = split_meta(f.read())
+            meta, body = split_meta(f.read())
             title = meta['title'] if meta.get('title', False) else file_name
             page = {'date_modified': date_modified,
                     'title': title,
                     'name': file_name}
+
+            # 只返回title
+            if mode == 'title':
+                pass
+
+            # 返回title和body头部
+            elif mode == 'simple':
+                toc = re.search('\[TOC\]', body, re.S)
+                if toc:
+                    body = body[:toc.span()[1]]
+                else:
+                    preview = re.search(r'\#\#.*\#\#', body, re.S | re.M)
+                    if preview:
+                        body = preview.group()[:-2]
+                # print('\n\n\n', body, '\n', '-'*20)
+                body = markdown.markdown(body, extensions=EXTENSTIONS)
+                page['body'] = body
+
             page_list.append(page)
     page_list = sorted(
             page_list, key=lambda x: x['date_modified'], reverse=True)
 
-    return page_list
+    return {'data': page_list, 'total': total}
 
 
 def get_page_detail(name):
@@ -70,28 +89,3 @@ def get_page_detail(name):
         return page
 
     raise Exception('居然找不到')
-
-
-def get_simple_page_list(index=1, size=20):
-    ''' 获取带简略信息的文章列表 '''
-    # pages = db.session.query(Page) \
-    #           .filter_by(is_show=True) \
-    #           .order_by(Page.date_create.desc())
-
-    # total = pages.count()
-
-    # pages = pages.slice((index - 1) * size, index * size).all()
-    # for page in pages:
-    #     toc = re.search('\[TOC\]', page.body, re.S)
-    #     if toc:
-    #         page.body = page.body[:toc.span()[1]]
-    #     else:
-    #         sd_sd_title = re.search('(\#\#.*\#\#{1})', page.body, re.S)
-    #         if sd_sd_title:
-    #             page.body = page.body[:sd_sd_title.span()[1] - 2]
-    #     page.body = markdown.markdown(page.body, extensions=EXTENSTIONS)
-    # return {'data': [p._todict() for p in pages],
-    #         'index': index,
-    #         'size': size,
-    #         'total': total}
-    return {}
