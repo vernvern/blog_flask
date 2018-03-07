@@ -51,11 +51,11 @@ function show_page(name){
 
 
 // index - func - 文章简要列表
-function get_simple_page_list(index=1, value=20){
+function get_simple_page_list(index=1, size=20){
     var accordion = "accordion" + index;
     $.post('http://127.0.0.1:5000/api/page/get_simple_page_list', {
         index: index,
-        value: value
+        size: size,
     },
     function(ret){
         var div_list = "";  // 文章简要

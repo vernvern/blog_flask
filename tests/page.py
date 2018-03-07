@@ -46,8 +46,9 @@ tags:
         self.page_name = 'add_xiaobing_in_wechat'
 
     def test_get_page_list(self):
-        ret = modules_page.get_page_list()
-        modules_page.get_page_list(mode='simple')
+        modules_page.get_page_list()
+        ret = modules_page.get_page_list(mode='simple', index=1, size=1)
+        print(ret)
 
     def test_get_page_detail(self):
         ret = modules_page.get_page_detail(self.page_name)

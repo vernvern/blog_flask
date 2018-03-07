@@ -37,9 +37,8 @@ def split_meta(string):
     return ret_meta, body
 
 
-def get_page_list(mode='title'):
+def get_page_list(mode='title', index=1, size=20):
     page_path_list = glob.glob(PAGE_PATH + '**/*.md', recursive=True)
-    total = len(page_path_list)
     page_list = []
     for page_path in page_path_list:
         file_name = page_path.split('/')[-1][:-3]
@@ -62,14 +61,18 @@ def get_page_list(mode='title'):
                                     body, re.S | re.M)
                 if preview:
                     body = body[:preview.span()[1]]
-                    print('\n\n\n', body, '\n', '-'*20)
                 page['body'] = body
 
             page_list.append(page)
     page_list = sorted(
             page_list, key=lambda x: x['date_modified'], reverse=True)
 
-    return {'data': page_list, 'total': total}
+    total = len(page_list)
+    start = size * (index - 1)
+    end = start + size
+    page_list = page_list[start:end]
+
+    return {'data': page_list, 'total': total, 'index': index, 'size': size}
 
 
 def get_page_detail(name):
