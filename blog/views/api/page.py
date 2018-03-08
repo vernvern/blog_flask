@@ -11,19 +11,18 @@ urls = 'api/page'
 
 @http(methods=['POST'])
 def get_page_list():
-    keyword = request.form.get('keyword', None)
-    ret = page.get_page_list(keyword)
-    return ret
+    return page.get_page_list()
 
 
 @http(methods=['POST'])
 def get_page_detail():
-    id_ = request.form['id']
-    return page.get_page_detail(id_)
+    name = request.form['name']
+    data = page.get_page_detail(name)
+    return {'data': data}
 
 
 @http(methods=['POST'])
 def get_simple_page_list():
     index = int(request.form.get('index', 1))
     size = int(request.form.get('size', 20))
-    return page.get_simple_page_list(index, size)
+    return page.get_page_list(mode='simple', index=index, size=size)
