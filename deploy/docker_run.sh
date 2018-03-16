@@ -27,7 +27,7 @@ fi
 
 # rebuild
 docker network create --subnet=172.18.0.0/16  net
-if [[ "$CI"v == "true"v ]]; then
+if [ "$CI"v == "true"v ]; then
     mkdir /home/travis/build/vernvern/log
     docker run --name blog_python -d -v /home/travis/build/vernvern/blog/log:/opt/log -v /home/travis/build/vernvern/blog:/opt/src -p 5000:5000 --network net --ip 172.18.0.3 blog:python-3.6.4
     docker run --name blog_redis -p 6379:6379 -d  --network net --ip 172.18.0.2 blog:redis-4.0.8
