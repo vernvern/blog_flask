@@ -1,6 +1,6 @@
 # stop python docker
 (docker inspect blog_python) > /dev/null 2>&1
-if [ $? == '0' ]; then
+if [ $? == '0' ] ; then
     echo 'docker stop blog_python:'
     docker stop blog_python
     echo 'docker rm blog_python:'
@@ -9,7 +9,7 @@ fi
 
 # stop redis docker
 (docker inspect blog_redis) > /dev/null 2>&1
-if [ $? == '0' ]; then
+if [ $? == '0' ] ; then
     echo 'docker stop blog_redis:'
     docker stop blog_redis
     echo 'docker rm blog_redis:'
@@ -18,7 +18,7 @@ fi
 
 # rm network
 (docker network inspect net) > /dev/null 2>&1
-if [ $? == '0' ]; then
+if [ $? == '0' ] ; then
     echo 'docker network rm net:'
     docker network rm net
 fi
