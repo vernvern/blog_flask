@@ -1,14 +1,18 @@
-language: python
-python:
-    - "3.6"
+sudo: required
 
-install:
-    - pip install -r requirements.txt
-    - pip install coveralls
+language: python
+
+services:
+    - docker
+
+before_install:
+    - docker build -t blog:python-3.6.4 ./deploy/Dockerfiles/python
+    - docker build -t blog:redis-4.0.8 ./deploy/Dockerfiles/redis
+    - sh ./deploy/docker_run.sh
 
 script:
     - coverage run --source=blog -m unittest discover
 
 
 after_success:
-    - coveralls
+    # - coveralls
