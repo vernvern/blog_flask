@@ -27,8 +27,8 @@ def show_result(status):
 
 
 def main():
-    show_result(True)
-    sys.exit(True)
+    show_result(0)
+    sys.exit(0)
 
 
 main()
