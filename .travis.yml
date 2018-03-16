@@ -13,7 +13,7 @@ before_install:
 
 script:
     - sh ./deploy/docker_run.sh
-    - docker exec -it blog_python coverage run --source=blog -m unittest discover
+    - docker exec -it blog_python nosetests -v --with-coverage --cover-package=blog --cover-xml
 
 after_success:
     - docker exec -it blog_python pip3 install coveralls
