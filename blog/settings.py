@@ -34,8 +34,8 @@ app_filter = AppFilter()
 
 # 日志输入formatter
 formatter = logging.Formatter(
-        '\n[Level] %(levelname)s\n%(datetime)s\n' +
-        '%(Api)s\n%(Method)s\n%(message)s\n')
+    '\n[Level] %(levelname)s\n%(datetime)s\n' +
+    '%(Api)s\n%(Method)s\n%(message)s\n')
 
 # info 文件日志
 info_file_handler = logging.FileHandler(app.config['LOG_INFO_FILE_PATH'],

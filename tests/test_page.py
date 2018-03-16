@@ -47,11 +47,10 @@ tags:
 
     def test_get_page_list(self):
         modules_page.get_page_list()
-        ret = modules_page.get_page_list(mode='simple')
-        print(ret)
+        modules_page.get_page_list(mode='simple')
 
     def test_get_page_detail(self):
-        ret = modules_page.get_page_detail(self.page_name)
+        modules_page.get_page_detail(self.page_name)
 
 
 if __name__ == '__main':
