@@ -5,7 +5,9 @@ WORKDIR /opt/src
 COPY ./requirements.txt /opt/src/
 COPY ./sources.list /opt/src/
 
-RUN if [ "$CI"v = "true"v ] ; then ; mv ./sources.list /etc/apt/sources.list ; fi \
+RUN if [ "$CI"v = "true"v ] ; then \
+    mv ./sources.list /etc/apt/sources.list \
+    fi \
     && apt-get -y update \
     && apt-get install -y python3-pip python3-dev \
     && pip3 install -r /opt/src/requirements.txt --no-cache-dir \
