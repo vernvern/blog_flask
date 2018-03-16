@@ -70,7 +70,7 @@ def get_page_list(mode='title', index=1, size=20):
 
             page_list.append(page)
     page_list = sorted(
-            page_list, key=lambda x: x['date_modified'], reverse=True)
+        page_list, key=lambda x: x['date_modified'], reverse=True)
 
     if mode != 'title':
         start = size * (index - 1)
@@ -85,7 +85,7 @@ def get_page_detail(name):
     date_modified = arrow.get(os.stat(page_path).st_mtime).for_json()
     with open(page_path, 'r') as f:
         meta, body = split_meta(f.read())
-        title = meta['title'] if meta.get('title', False) else file_name
+        title = meta['title'] if meta.get('title', False) else name
         page = {'date_modified': date_modified,
                 'date_created': meta['date_created'],
                 'title': title,

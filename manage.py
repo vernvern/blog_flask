@@ -13,8 +13,6 @@ import os
 import subprocess
 from docopt import docopt
 
-import scripts
-
 
 if __name__ == '__main__':
     argments = docopt(__doc__)
