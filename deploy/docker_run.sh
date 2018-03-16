@@ -31,8 +31,11 @@ if [[ $CI == 'true' ]]; then
     mkdir /home/travis/build/vernvern/log
     docker run --name blog_python -d -v /home/travis/build/vernvern/blog/log:/opt/log -v /home/travis/build/vernvern/blog:/opt/src -p 5000:5000 --network net --ip 172.18.0.3 blog:python-3.6.4
     docker run --name blog_redis -p 6379:6379 -d  --network net --ip 172.18.0.2 blog:redis-4.0.8
+    ls /home/travis/build/vernvern
 else
     docker run --name blog_python -d -v /Volumes/log:/opt/log -v /Users/vernli/python/blog:/opt/src -p 5000:5000 --network net --ip 172.18.0.3 blog:python-3.6.4
     docker run --name blog_redis -p 6379:6379 -d  --network net --ip 172.18.0.2 blog:redis-4.0.8
-
+    echo '2333'
 fi
+
+docker ps
