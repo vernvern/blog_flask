@@ -26,7 +26,7 @@ if __name__ == '__main__':
         arg = argments['<test_name>']
         files = [f[:-3] for f in os.listdir('tests') if f[0] != '_']
         if arg is None:
-            os.system('nosetests tests/*.py --with-coverage'
+            os.system('nosetests tests/*.py --with-coverage '
                       '--cover-package=blog --cover-xml')
         elif arg in files:
             popen = subprocess.Popen(['nosetests', 'tests/%s.py' % arg,

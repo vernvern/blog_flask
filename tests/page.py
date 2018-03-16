@@ -48,7 +48,6 @@ tags:
     def test_get_page_list(self):
         modules_page.get_page_list()
         ret = modules_page.get_page_list(mode='simple')
-        print(ret)
 
     def test_get_page_detail(self):
         ret = modules_page.get_page_detail(self.page_name)
