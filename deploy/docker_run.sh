@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # stop python docker
 (docker inspect blog_python) > /dev/null 2>&1
 if [ $? == '0' ] ; then
