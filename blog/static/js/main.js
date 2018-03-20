@@ -1,6 +1,8 @@
+var ip = '172.18.0.3:8000'
+
 // artile - 事件 - 文章标题列表
 $("[href='#article']").click(function(){
-    $.post('http://127.0.0.1:5000/api/page/get_page_list',
+    $.post('http://' + ip +'/api/page/get_page_list',
     {},
     function(ret){
         $("#article").text("");
@@ -26,7 +28,7 @@ $("[href='#article']").click(function(){
 
 // index/artice - 事件 - 文章详情
 function show_page(name){
-    $.post('http://127.0.0.1:5000/api/page/get_page_detail',
+    $.post('http://' + ip + '/api/page/get_page_detail',
     {
         name: name
     },
@@ -53,7 +55,7 @@ function show_page(name){
 // index - func - 文章简要列表
 function get_simple_page_list(index=1, size=20){
     var accordion = "accordion" + index;
-    $.post('http://127.0.0.1:5000/api/page/get_simple_page_list', {
+    $.post('http://' + ip + '/api/page/get_simple_page_list', {
         index: index,
         size: size,
     },
