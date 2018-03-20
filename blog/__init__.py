@@ -1,11 +1,11 @@
 from flask import Flask
-from . import config
+from blog import config
+
 
 app = Flask(__name__)
-app.config.from_object(config.DebugConfig)
-
 
 # 加载配置
+app.config.from_object(config.DebugConfig)
 import blog.settings
 
 # 注册url
