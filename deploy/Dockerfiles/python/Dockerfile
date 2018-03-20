@@ -12,7 +12,7 @@ RUN pip install --upgrade pip \
 FROM dependencies as debug
 WORKDIR /opt/src
 VOLUME ['/opt/script', '/opt/log', '/opt/data', '/opt/src']
-CMD gunicorn -w 4 -b 127.0.0.1:8000 wsgi:app
+CMD gunicorn -w 4 -b 0.0.0.0:8000 wsgi:app
 
 # 发布
 FROM python:3.6-alpine3.7 as release
