@@ -36,5 +36,5 @@ if [ "$CI"v = "true"v ]; then
 else
     docker run --name blog_redis -p 6379:6379 -d  --network net --ip 172.18.0.2 blog:redis-4.0.8
     docker run --name blog_python -d -v /opt/log:/opt/log -v /root/blog:/opt/src -p 8000:8000 --network net --ip 172.18.0.3 blog:python-3.6.4
-    docker run --name blog_nginx -p 80:80 -d -v /opt/log:/opt/log --network net --ip 172.18.0.4 blog:nginx-1.13.9
+    docker run --name blog_nginx -p 80:80 -d -v /opt/log:/opt/log -v /root/blog:/opt/src --network net --ip 172.18.0.4 blog:nginx-1.13.9
 fi
