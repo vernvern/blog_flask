@@ -11,7 +11,6 @@ urls = 'api/page'
 
 @http(methods=['POST'])
 def get_page_list():
-    ''' '''
     return page.get_page_list()
 
 
