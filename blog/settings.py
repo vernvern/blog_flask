@@ -45,20 +45,21 @@ info_handler.setLevel(logging.INFO)
 info_handler.setFormatter(formatter)
 
 # error
-error_handler = logging.FileHandler(app.config['LOG_INFO_FILE_PATH'],
+error_handler = logging.FileHandler(app.config['LOG_ERROR_FILE_PATH'],
                                     encoding='UTF-8')
 error_handler.setLevel(logging.ERROR)
 error_handler.setFormatter(formatter)
 
 # debug console日志
-info_console_handler = logging.StreamHandler(sys.stdout)
-info_console_handler.addFilter(app_filter)
-info_console_handler.setLevel(logging.DEBUG)
-info_console_handler.setFormatter(formatter)
+debug_console_handler = logging.StreamHandler(sys.stdout)
+debug_console_handler.addFilter(app_filter)
+debug_console_handler.setLevel(logging.DEBUG)
+debug_console_handler.setFormatter(formatter)
 
 # 添加handler
 app.logger.addHandler(info_handler)
 app.logger.addHandler(error_handler)
+app.logger.addHandler(debug_console_handler)
 
 
 def log_request(func, rule, **options):
