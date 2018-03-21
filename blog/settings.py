@@ -58,6 +58,7 @@ info_handler.setFormatter(formatter)
 # error
 error_handler = logging.FileHandler(app.config['LOG_ERROR_FILE_PATH'],
                                     encoding='UTF-8')
+error_handler.addFilter(app_filter)
 error_handler.setLevel(logging.ERROR)
 error_handler.setFormatter(formatter)
 
