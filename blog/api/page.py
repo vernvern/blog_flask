@@ -1,10 +1,7 @@
 # -*- coding:utf-8 -*-
 
-import arrow
-
 from flask import request
 
-from blog import app
 from blog.toolkit.route.route import http
 from blog.modules import page
 
