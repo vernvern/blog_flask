@@ -1,13 +1,13 @@
 from flask import Flask
-from . import config
+from blog import config
+
 
 app = Flask(__name__)
-app.config.from_object(config.DebugConfig)
-
 
 # 加载配置
+app.config.from_object(config.ProductConfig)
 import blog.settings
 
 # 注册url
-import blog.views.views
-import blog.views.api.page
+import blog.api.base
+import blog.api.page

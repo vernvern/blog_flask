@@ -1,21 +1,26 @@
-# python
-FROM python:3.6.4-jessie as python
+# python 基础镜像
+FROM python:3.6.4-jessie as base
 WORKDIR /opt/src
 
+# 依赖
+FROM base as dependencies
 COPY ./requirements.txt /opt/src/
-COPY ./sources.list /opt/src/
+RUN pip install --upgrade pip \
+    && pip install -r /opt/src/requirements.txt --no-cache-dir
 
-RUN if [ "$CI"v = "true"v ] ; then \
-    mv ./sources.list /etc/apt/sources.list ; \
-    fi \
-    && apt-get -y update \
-    && apt-get install -y python3-pip python3-dev \
-    && pip3 install -r /opt/src/requirements.txt --no-cache-dir \
-    && rm -rf /opt/src/requirements.txt \
-    && apt-get  -y autoremove \
-    && apt-get -y autoclean
-
+# 复制项目文件, build
+FROM dependencies as debug
+WORKDIR /opt/src
+EXPOSE 8000
 VOLUME ['/opt/script', '/opt/log', '/opt/data', '/opt/src']
+CMD gunicorn -w 4 -b 0.0.0.0:8000 wsgi:app
 
-CMD python3 manage.py runserver
-
+# 发布
+FROM python:3.6-alpine3.7 as release
+WORKDIR /opt/src
+EXPOSE 8000
+COPY ./requirements.txt /opt/src/
+RUN pip install --upgrade pip \
+    && pip install -r /opt/src/requirements.txt --no-cache-dir
+VOLUME ['/opt/script', '/opt/log', '/opt/data', '/opt/src']
+CMD gunicorn -w 4 -b 127.0.0.1:8000 wsgi:app

@@ -8,11 +8,13 @@ services:
     - docker
 
 before_install:
-    - docker build -t blog:python-3.6.4 ./deploy/Dockerfiles/python
+    - docker build --target debug -t blog:python-3.6.4 ./deploy/Dockerfiles/python
     - docker build -t blog:redis-4.0.8 ./deploy/Dockerfiles/redis
 
 script:
-    - sh ./deploy/docker_run.sh
+    - sh ./deploy/docker_test_run.sh
+    - docker ps
+    - docker inspect blog_python
     - docker exec -it blog_python nosetests -v --with-coverage --cover-package=blog --cover-xml
 
 after_success:
