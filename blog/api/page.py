@@ -29,12 +29,3 @@ def get_simple_page_list():
     index = int(request.form.get('index', 1))
     size = int(request.form.get('size', 20))
     return page.get_page_list(mode='simple', index=index, size=size)
-
-
-@http(methods=['POST'])
-def log_test():
-    now = arrow.now().for_json()
-    app.logger.info('test log %s' % now)
-    app.logger.error('test log %s' % now)
-    raise ValueError('test exception log')
-    return {}
