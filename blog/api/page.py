@@ -36,4 +36,5 @@ def log_test():
     now = arrow.now().for_json()
     app.logger.info('test log %s' % now)
     app.logger.error('test log %s' % now)
+    raise ValueError('test exception log')
     return {}
