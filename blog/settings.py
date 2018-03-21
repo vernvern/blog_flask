@@ -30,7 +30,18 @@ class AppFilter(logging.Filter):
         return True
 
 
+class InfoFilter(logging.Filter):
+    def filter(self, record):
+        if record.levelno != logging.INFO:
+            return False
+        record.Api = '[API] %s' % request.path
+        record.Method = '[Method] %s' % request.method
+        record.datetime = '[DateTime] %s' % arrow.now().to('08:00').for_json()
+        return True
+
+
 app_filter = AppFilter()
+info_filter = InfoFilter()
 
 # 日志输入formatter
 formatter = logging.Formatter(
@@ -40,7 +51,7 @@ formatter = logging.Formatter(
 # info
 info_handler = logging.FileHandler(app.config['LOG_INFO_FILE_PATH'],
                                    encoding='UTF-8')
-info_handler.addFilter(app_filter)
+info_handler.addFilter(info_filter)
 info_handler.setLevel(logging.INFO)
 info_handler.setFormatter(formatter)
 
