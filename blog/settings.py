@@ -37,12 +37,18 @@ formatter = logging.Formatter(
     '\n[Level] %(levelname)s\n%(datetime)s\n' +
     '%(Api)s\n%(Method)s\n%(message)s\n')
 
-# info 文件日志
-info_file_handler = logging.FileHandler(app.config['LOG_INFO_FILE_PATH'],
-                                        encoding='UTF-8')
-info_file_handler.addFilter(app_filter)
-info_file_handler.setLevel(logging.INFO)
-info_file_handler.setFormatter(formatter)
+# info
+info_handler = logging.FileHandler(app.config['LOG_INFO_FILE_PATH'],
+                                   encoding='UTF-8')
+info_handler.addFilter(app_filter)
+info_handler.setLevel(logging.INFO)
+info_handler.setFormatter(filterter)
+
+# error
+error_handler = logging.FileHandler(app.config['LOG_INFO_FILE_PATH'],
+                                    encoding='UTF-8')
+error_handler.setLevel(logging.ERROR)
+error_handler.setFormatter(filterter)
 
 # debug console日志
 info_console_handler = logging.StreamHandler(sys.stdout)
@@ -51,8 +57,8 @@ info_console_handler.setLevel(logging.DEBUG)
 info_console_handler.setFormatter(formatter)
 
 # 添加handler
-app.logger.addHandler(info_file_handler)
-app.logger.addHandler(info_console_handler)
+app.logger.addHandler(info_handler)
+app.logger.addHandler(error_handler)
 
 
 def log_request(func, rule, **options):
