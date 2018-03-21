@@ -17,5 +17,6 @@ class DebugConfig(Config):
     DEBUG = True
     LOG_LEVEL = logging.NOTSET
 
+
 class ProductConfig(Config):
     pass

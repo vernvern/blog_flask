@@ -42,13 +42,13 @@ info_handler = logging.FileHandler(app.config['LOG_INFO_FILE_PATH'],
                                    encoding='UTF-8')
 info_handler.addFilter(app_filter)
 info_handler.setLevel(logging.INFO)
-info_handler.setFormatter(filterter)
+info_handler.setFormatter(formatter)
 
 # error
 error_handler = logging.FileHandler(app.config['LOG_INFO_FILE_PATH'],
                                     encoding='UTF-8')
 error_handler.setLevel(logging.ERROR)
-error_handler.setFormatter(filterter)
+error_handler.setFormatter(formatter)
 
 # debug console日志
 info_console_handler = logging.StreamHandler(sys.stdout)
