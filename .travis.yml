@@ -12,7 +12,7 @@ before_install:
     - docker build -t blog:redis-4.0.8 ./deploy/Dockerfiles/redis
 
 script:
-    - sh ./deploy/docker_run.sh
+    - sh ./deploy/docker_test_run.sh
     - docker exec -it blog_python nosetests -v --with-coverage --cover-package=blog --cover-xml
 
 after_success:
