@@ -13,6 +13,7 @@ before_install:
 
 script:
     - sh ./deploy/docker_test_run.sh
+    - docker ps
     - docker exec -it blog_python nosetests -v --with-coverage --cover-package=blog --cover-xml
 
 after_success:
