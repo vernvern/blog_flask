@@ -41,7 +41,7 @@ formatter = logging.Formatter(
 info_file_handler = logging.FileHandler(app.config['LOG_INFO_FILE_PATH'],
                                         encoding='UTF-8')
 info_file_handler.addFilter(app_filter)
-info_file_handler.setLevel(logging.INFO)
+info_file_handler.isEnabledFor(logging.INFO)
 info_file_handler.setFormatter(formatter)
 
 # debug console日志
@@ -85,7 +85,7 @@ def log_api_200(response):
     message = '\n'.join(args)
     log += message
 
-    app.logger.info(message)
+    app.logger.info(log)
     return
 
 
