@@ -9,4 +9,4 @@ app.config.from_object(config.DebugConfig)
 import blog.settings
 
 # 注册url
-import blog.views.api.page
+import blog.api.page
