@@ -14,6 +14,7 @@ before_install:
 script:
     - sh ./deploy/docker_test_run.sh
     - docker ps
+    - docker inspect blog_python
     - docker exec -it blog_python nosetests -v --with-coverage --cover-package=blog --cover-xml
 
 after_success:
