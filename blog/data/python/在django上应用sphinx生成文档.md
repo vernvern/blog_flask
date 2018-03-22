@@ -1,13 +1,12 @@
 ---
-title: 在django上应用sphinx生成文档
-date: 2017/06/10 14:52:00
-categories: python
-updated: 2017/06/10 14:52:00
-comments: true
 
-tags:
-- django
-- sphinx
+date_created: '2018-03-22T11:52:37.870624+08:00'
+date_modified: '2018-03-22T11:52:37.870710+08:00'
+hash: d3dd653ba0ff1f7b30518abca48cf91f
+id: b0b9c5c4-011f-4c62-bc6c-9c348e40148d
+sort: python
+tags: []
+title: "\u5728django\u4E0A\u5E94\u7528sphinx\u751F\u6210\u6587\u6863"
 
 ---
 

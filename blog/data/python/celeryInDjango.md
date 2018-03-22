@@ -1,15 +1,12 @@
 ---
 
-title: 在django中使用celery处理任务队列和定时任务
-date: 2017/08/10 23:30:21
-categories: python
-updated: 2017/08/10 23:30:22
-comments: true
-toc: true
-
-tags:
-- celery
-- django
+date_created: '2018-03-22T11:52:37.868713+08:00'
+date_modified: '2018-03-22T11:52:37.868837+08:00'
+hash: 22ae9889422e851889c34ec3a909edec
+id: ab48e67f-5bc1-4342-9cc0-dc7920e38be3
+sort: python
+tags: []
+title: celeryInDjango
 
 ---
 
