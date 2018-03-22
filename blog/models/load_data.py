@@ -1,12 +1,18 @@
 # -*- coding=utf-8 -*-
 
 import re
+import sys
 import glob
 import uuid
+
 import yaml
 import arrow
 
-from .database import RedisManager
+
+sys.path.append('/opt/src')
+
+
+from blog.models.database import RedisManager
 from blog import app
 
 
