@@ -72,12 +72,12 @@ def load_pages_data():
 
             # sort
             rds(app.config['REDIS_DB_SORT']).zadd(
-                sort, _id=arrow.get(rds_dict['date_created']).timestamp)
+                sort, float(arrow.get(rds_dict['date_created']).timestamp), _id)
 
             # tags
             for tag in tags:
                 rds(app.config['REDIS_DB_TAGS']).zadd(
-                    tag, _id=arrow.get(rds_dict['date_created']).timestamp)
+                    tag, float(arrow.get(rds_dict['date_created']).timestamp), _id)
 
 
 if __name__ == '__main__':
