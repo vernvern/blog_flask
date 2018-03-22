@@ -1,15 +1,12 @@
 ---
 
-title: python3实现微信接入小冰~
-date: 2017/06/12 21:30:12
-categories: python
-updated: 2017/06/12 21:30:12
-comments: true
-toc: true
-
-tags:
-- itchat
-
+date_created: '2018-03-22T11:52:37.866650+08:00'
+date_modified: '2018-03-22T11:52:37.866770+08:00'
+hash: 0c5353776430b2cd96c597fc8dbdbcc8
+id: 4d36570e-68c4-42f9-b106-bc50225b4f51
+sort: python
+tags: []
+title: add_xiaobing_in_wechat
 
 ---
 

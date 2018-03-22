@@ -1,19 +1,14 @@
 ---
 
-categories: python
-title: 使用hexo在github上搭建博客
-date: 2017/06/08 20:36:2
-updated: 2017/06/08 20:36:2
-comments: true
-toc: true
-
-tags:
-- hexo
-- github
-
+date_created: '2018-03-22T11:53:48.982744+08:00'
+date_modified: '2018-03-22T11:53:48.982936+08:00'
+hash: 3ab4736f6a92f08f70317c40666cdaa8
+id: a81d9010-9a9e-4778-83d8-a7c6fca9309e
+sort: "\u672A\u5206\u7C7B"
+tags: []
+title: "hexo\u5728github\u4E0A\u642D\u5EFA\u535A\u5BA2"
 
 ---
-
 
 ## 初始化
 
