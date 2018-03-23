@@ -6,20 +6,33 @@
 
 ```
 .
+├── .coveralls.yml
+├── .travis.yml
 ├── blog
-│   ├── api          #  接口
-│   ├── models       #  数据类
-│   ├── modules      #  业务代码
-│   ├── static       #  静态文件
-│   ├── templates    #  模版
-│   ├── server.py    #  项目程序入口
-│   ├── settings.py  #  配置
-│   ├── toolkit      #  与业务无关的封装
-│   └── views        #  视图
-├── docs             #  文档
-├── manage.py        #  控制台( 打开项目、跑单元测试、跑脚本、etc.)
-├── scripts          #  脚本
-├── requirements.txt #  依赖
-└── tests            #  单元测试
+│   ├── __init__.py
+│   ├── api/
+│   ├── config.py
+│   ├── data/
+│   ├── models/
+│   ├── modules/
+│   ├── settings.py
+│   ├── static/
+│   ├── templates/
+│   └── toolkit/
+├── deploy
+│   ├── Dockerfiles
+│   │   ├── nginx
+│   │   │   ├── Dockerfile
+│   │   │   └── nginx.conf
+│   │   ├── python
+│   │   │   ├── Dockerfile
+│   │   │   ├── requirements.txt
+│   │   │   └── sources.list
+│   │   └── redis
+│   │       └── Dockerfile
+│   └── docker_test_run.sh
+├── docs/
+├── manage.py
+├── tests/
 
 ```
