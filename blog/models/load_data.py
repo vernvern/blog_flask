@@ -67,7 +67,7 @@ def load_pages_data():
 
             # load into redis
             rds_dict = meta.copy()
-            rds_dict['body'] = string
+            rds_dict['body'] = body
 
             _id = rds_dict.pop('id')
             sort = rds_dict.pop('sort')

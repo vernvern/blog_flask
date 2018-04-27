@@ -93,7 +93,8 @@ function get_simple_page_list(index=1, size=20){
 
 // index - 事件 - 加载完页面触发
 $(function(){
-    get_simple_page_list(1, 20)
+    get_simple_page_list(1, 20);
+    get_sort_list();
 })
 
 // index - 事件 - 查看更多
@@ -102,3 +103,20 @@ $("#show_more_article").click(function(){
     get_simple_page_list(index, 20);
 
 });
+
+
+// sort - 获取sort
+function get_sort_list(){
+    $.post(address +'/api/sort/get_sort_list',
+    {},
+    function(ret){
+        var sorts = ret.data
+        var _sorts = '';
+        for(i=0; i<.length; i++){
+            sort = '<div>' + sorts[i] + "</div>";
+            _sorts += sort;
+        }
+        $("#sort").prepend(_sorts);
+    })
+};
+
