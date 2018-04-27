@@ -11,3 +11,4 @@ import blog.settings
 # 注册url
 import blog.api.base
 import blog.api.page
+import blog.api.sort

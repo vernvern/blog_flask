@@ -107,7 +107,7 @@ $("#show_more_article").click(function(){
 
 // sort - 获取sort
 function get_sort_list(){
-    $.post(address +'/api/sort/get_sort_list',
+    $.get(address +'/api/sort/get_sort_list',
     {},
     function(ret){
         var sorts = ret.data
