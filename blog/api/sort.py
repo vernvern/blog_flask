@@ -12,5 +12,5 @@ rds = RedisManager()
 
 @http(methods=['GET'])
 def get_sort_list():
-    sorts = [rds(app.config['REDIS_DB_SORT']).keys('*')]
+    sorts = rds(app.config['REDIS_DB_SORT']).keys('*')
     return [x.decode('utf-8') for x in sorts]
