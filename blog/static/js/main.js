@@ -130,7 +130,7 @@ function get_sort_list(){
 // 以下代码摘自whxaxes的https://github.com/whxaxes/canvas-test/blob/master/src/3D-demo/3Dtag.html
 var tagEle = "querySelectorAll" in document ? document.querySelectorAll(".tag") : getClass("tag"),
     paper = "querySelectorAll" in document ? document.querySelector(".tagBall") : getClass("tagBall")[0];
-RADIUS = 220,
+RADIUS = 80,
     fallLength = 500,
     tags = [],
     angleX = Math.PI / 500,
