@@ -40,6 +40,7 @@ a{
 a.show_detail{
 }
 .tagBall {
+    margin: 50px auto;
     position: relative;
 }
 .tag {

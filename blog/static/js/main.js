@@ -160,7 +160,8 @@ function innit() {
         var y = RADIUS * Math.sin(a) * Math.sin(b);
         var z = RADIUS * Math.cos(a);
         var t = new tag(tagEle[i], x, y, z);
-        tagEle[i].style.color = "rgb(" + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + ")";
+        var color = parseInt(Math.random() * 255);
+        tagEle[i].style.color = "rgb(" + color + "," + color + "," + color + ")";
         tags.push(t);
         t.move();
     }
