@@ -48,8 +48,10 @@ class Page:
                     body = body[:preview.span()[1]]
 
             tmp_page = dict(title=page['title'],
-                            body=page['body'],
-                            id=page['id'])
+                            id=page['id'],
+                            body=markdown(
+                                page['body'],
+                                extensions=app.config['EXTENSTIONS']))
             page_list.append(tmp_page)
 
         if index and size:
