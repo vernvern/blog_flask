@@ -3,11 +3,11 @@
 from flask import request
 
 from blog.toolkit.route.route import http
-from blog.modules import page
+from blog.modules.page import Page
 
 
 urls = 'api/page'
-
+page = Page()
 
 @http(methods=['POST'])
 def get_page_list():
@@ -17,7 +17,7 @@ def get_page_list():
 @http(methods=['POST'])
 def get_page_detail():
     name = request.form['name']
-    data = page.get_page_detail(name)
+    data = page.get_page(name)
     return {'data': data}
 
 

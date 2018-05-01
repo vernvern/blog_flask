@@ -1,16 +1,14 @@
 # -*- coding=utf-8 -*-
 
-from blog.models.database import RedisManager
-from blog.toolkit.route.route import http
 from blog import app
+from blog.toolkit.route.route import http
+from blog.modules.page import Page
 
 
 urls = 'api/sort'
-
-rds = RedisManager()
+page = Page()
 
 
 @http(methods=['GET'])
 def get_sort_list():
-    sorts = rds(app.config['REDIS_DB_SORT']).keys('*')
-    return {'data': [x.decode('utf-8') for x in sorts]}
+    return {'data': page_get_sorts()}
