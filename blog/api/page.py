@@ -9,6 +9,7 @@ from blog.modules.page import Page
 urls = 'api/page'
 page = Page()
 
+
 @http(methods=['POST'])
 def get_page_list():
     return page.get_page_list()
@@ -16,8 +17,8 @@ def get_page_list():
 
 @http(methods=['POST'])
 def get_page_detail():
-    name = request.form['name']
-    data = page.get_page(name)
+    _id = request.form['id']
+    data = page.get_page(_id)
     return {'data': data}
 
 

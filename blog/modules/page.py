@@ -16,7 +16,7 @@ PAGE_PATH = 'blog/data/'
 
 class Page:
     ''' 文章辅助类 '''
-    _pages = {}
+    _pages = {}  # {'id': page_dict}
     _singleton = None
 
     def __init__(self):
@@ -45,9 +45,11 @@ class Page:
                                     body, re.S | re.M)
                 if preview:
                     body = body[:preview.span()[1]]
-                page['body'] = body
 
-            page_list.append(page)
+            tmp_page = dict(title=page['title'],
+                            body=page['body'],
+                            id=page['id'])
+            page_list.append(tmp_page)
 
         if index and size:
             start = size * (index - 1)
@@ -62,8 +64,8 @@ class Page:
     def get_sorts(self):
         return list(set([p['sort'] for p in self.pages]))
 
-    def get_page(self, title):
-        page = self._pages[title]
+    def get_page(self, _id):
+        page = self._pages[_id]
         page['body'] = markdown(
             page['body'], extensions=app.config['EXTENSTIONS'])
         return page
@@ -118,4 +120,4 @@ class Page:
                     continue
 
                 meta.update({'body': body})
-                cls._pages[meta['title']] = meta
+                cls._pages[meta['id']] = meta

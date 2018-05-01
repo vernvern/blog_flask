@@ -15,7 +15,7 @@ $("[href='#article']").click(function(){
                 (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-' +
                 date.getDate();
             date = "<span class='date'>" + date + '</span>'
-            var page ='<a class="page" href="javascraddresst:void(0);" onclick="show_page(name)" name=' + page.name + '>' + page.title + "</a>"
+            var page ='<a class="page" href="javascraddresst:void(0);" onclick="show_page(id)" id=' + page.id + '>' + page.title + "</a>"
             var li = '<li class="page' + '">' + date + page + "</li>"
             insert = insert + li
         }
@@ -27,10 +27,10 @@ $("[href='#article']").click(function(){
 
 
 // index/artice - 事件 - 文章详情
-function show_page(name){
+function show_page(id){
     $.post(address + '/api/page/get_page_detail',
     {
-        name: name
+        id: id
     },
     function(ret)
     {
@@ -64,20 +64,20 @@ function get_simple_page_list(index=1, size=20){
         pages = ret.data;
         for(var i=0;i<pages.length;i++){
             var div = '<div class="panel panel-default">' +
-                      '<div class="panel-heading" role="tab" id="heading_' + pages[i].name + '">' +
+                      '<div class="panel-heading" role="tab" id="heading_' + pages[i].id + '">' +
                       '<h4 class="panel-title">' +
-                      '<a role="button" data-toggle="collapse" data-parent="#'+ accordion + '" href="#' + pages[i].name + '" aria-expanded="' + (i==0?'true':'false') + '" aria-controls="' + pages[i].name + '" ' + (i==0?'':'class="collapsed"') + '>' +
+                      '<a role="button" data-toggle="collapse" data-parent="#'+ accordion + '" href="#' + pages[i].id + '" aria-expanded="' + (i==0?'true':'false') + '" aria-controls="' + pages[i].id + '" ' + (i==0?'':'class="collapsed"') + '>' +
                       pages[i].title +
                       '</a>' +
                       '</h4>' +
                       '</div>' +
-                      '<div id=' + pages[i].name + ' class="panel-collapse collapse ' + (i==0?'in':'') + '" role="tabpanel" aria-labelledby="heading_' + pages[i].name + '">' +
+                      '<div id=' + pages[i].id + ' class="panel-collapse collapse ' + (i==0?'in':'') + '" role="tabpanel" aria-labelledby="heading_' + pages[i].id + '">' +
                       '<div class="panel-body">' +
                       pages[i].body +
                       '<center>.</center>' +
                       '<center>.</center>' +
                       '<center>.</center></br>' +
-                      '<center><a class="show_detail" href="javascraddresst:void(0);" onclick="show_page(name)" name="' + pages[i].name + '">查看全文</a></center>' +
+                      '<center><a class="show_detail" href="javascraddresst:void(0);" onclick="show_page(id)" id="' + pages[i].id + '">查看全文</a></center>' +
                       '</div>' +
                       '</div>' +
                       '</div>';
