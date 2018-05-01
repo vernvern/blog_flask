@@ -60,7 +60,7 @@ class Page:
                 'index': index, 'size': size}
 
     def get_sorts(self):
-        return [p for p in self._pages['sort']]
+        return list(set([p['sort'] for p in self.pages]))
 
     def get_page(self, title):
         page = self._pages[title]
