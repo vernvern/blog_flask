@@ -11,4 +11,4 @@ page = Page()
 
 @http(methods=['GET'])
 def get_sort_list():
-    return {'data': page_get_sorts()}
+    return {'data': page.get_sorts()}
