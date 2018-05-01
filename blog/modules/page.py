@@ -38,28 +38,27 @@ class Page:
 
         page_list = []
         for page in self.pages:
-            # 返回title和body头部
+            body = markdown(page['body'],
+                            extensions=app.config['EXTENSTIONS'])
+
             if mode == 'simple':
-                body = markdown(page['body'],
-                                extensions=app.config['EXTENSTIONS'])
                 preview = re.search(r'<div class="toc">\n<ul>.*</ul>\n</div>',
                                     body, re.S | re.M)
                 if preview:
                     body = body[:preview.span()[1]]
 
-            tmp_page = dict(title=page['title'],
-                            id=page['id'],
-                            body=markdown(
-                                page['body'],
-                                extensions=app.config['EXTENSTIONS']))
+            tmp_page = dict(title=page['title'], id=page['id'], body=body)
             page_list.append(tmp_page)
 
+        # 分类筛选
+        if sort:
+            page_list = [p for p in page_list if p['sort'] == sort]
+
+        # 分页
         if index and size:
             start = size * (index - 1)
             end = start + size
             page_list = page_list[start:end]
-        if sort:
-            page_list = [p for p in page_list if p['sort'] == sort]
 
         return {'data': page_list, 'total': len(self._pages),
                 'index': index, 'size': size}
