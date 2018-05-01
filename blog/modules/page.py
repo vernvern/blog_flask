@@ -89,6 +89,9 @@ class Page:
 
     @classmethod
     def load_pages_data(cls):
+        if cls._pages != {}:
+            return
+
         page_path_list = glob.glob(app.config['PAGE_PATH'] + '**/*.md',
                                    recursive=True)
         for page_path in page_path_list:
