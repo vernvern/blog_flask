@@ -3,9 +3,18 @@ var address = 'http://45.76.100.76'
 // artile - 事件 - 文章标题列表
 $("[href='#article']").click(get_page_list());
 
+
+// artile - 事件 - 根据分类获取文章标题列表
+$('p.sort').click(get_page_list(this.text()));
+
+
 function get_page_list(sort=null, index=0, size=0){
     $.post(address +'/api/page/get_page_list',
-    {},
+    {
+        sort: sort,
+        index: index,
+        size: size
+    },
     function(ret){
         $("#article").text("");
         var insert = '<ul class="page">'
@@ -121,7 +130,7 @@ function get_sort_list(){
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
             sort = '<div class="col-md-5 col-md-offset-1">' +
-               '<a class="sort" href="javascraddresst:void(0);" onclick="get_page_list(this.text())">' +  sorts[i] + '</a>' +
+               '<p class="sort"' +  sorts[i] + '</p>' +
                 "</div>";
             _sorts += sort;
         }
