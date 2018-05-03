@@ -47,7 +47,8 @@ class Page:
                 if preview:
                     body = body[:preview.span()[1]]
 
-            tmp_page = dict(title=page['title'], id=page['id'], body=body)
+            tmp_page = dict(title=page['title'], id=page['id'],
+                            body=body, date_created=page['date_created'])
             page_list.append(tmp_page)
 
         # 分类筛选

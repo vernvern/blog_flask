@@ -10,7 +10,7 @@ $("[href='#article']").click(function(){
         var pages = ret.data
         for(i=0; i<pages.length; i++){
             var page = pages[i];
-            var date = new Date(page.date_modified);
+            var date = new Date(page.date_created);
             date = date.getFullYear() + '-' +
                 (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-' +
                 date.getDate();
@@ -36,8 +36,10 @@ function show_page(id){
     {
         var title = ret.data.title;
         var body = ret.data.body;
-        var date_create = ret.data.date_create;
-        var date_modify = ret.data.date_modify;
+        var date_created = ret.data.date_created;
+        var date_modified = ret.data.date_modified;
+        var tags = ret.data.tags;
+        var sort = ret.data.sort;
 
         // title
         $(".modal-title").text("");
