@@ -121,7 +121,7 @@ function get_sort_list(){
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
             sort = '<div class="col-md-5 col-md-offset-1">' +
-               '<a class="sort" href="javascraddresst:void(0);" onclick="get_page_list(this.text())"' +  sorts[i] + '</a>' +
+               '<a class="sort" href="javascraddresst:void(0);" onclick="get_page_list(this.text())">' +  sorts[i] + '</a>' +
                 "</div>";
             _sorts += sort;
         }
