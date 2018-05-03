@@ -117,11 +117,12 @@ function get_sort_list(){
     {},
     function(ret){
         var sorts = ret.data
-        var _sorts = '';
+        var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
-            sort = '<div>' + sorts[i] + "</div>";
+            sort = '<div class="col-md-6">' + sorts[i] + "</div>";
             _sorts += sort;
         }
+        _sorts += '</div>';
         $("#sort").prepend(_sorts);
     })
 };
