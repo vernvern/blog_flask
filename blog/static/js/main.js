@@ -5,7 +5,7 @@ $("[href='#article']").click(get_page_list());
 
 
 // artile - 事件 - 根据分类获取文章标题列表
-$('p.sort').click(get_page_list(this.text()));
+$('p.sort').click(get_page_list(sort=this.text));
 
 
 function get_page_list(sort=null, index=0, size=0){
