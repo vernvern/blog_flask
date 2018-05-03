@@ -30,7 +30,7 @@ $("[href='#article']").click(function(){
 $(".sort").click(function(event){
     $.post(address +'/api/page/get_page_list',
     {
-        sort: event.text()
+        sort: "asd",
     },
     function(ret){
         $("#article").text("");
