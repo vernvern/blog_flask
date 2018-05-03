@@ -27,10 +27,10 @@ $("[href='#article']").click(function(){
 
 
 // Article － 根据分类获取文章标题列表
-$("[href='#sort']").click(function(event){
+$("[href='#sort']").click(function(){
     $.post(address +'/api/page/get_page_list',
     {
-        sort: event.this(),
+        sort: this.text(),
     },
     function(ret){
         $("#article").text("");
