@@ -8,7 +8,7 @@ $("[href='#article']").click(get_page_list());
 $('p.sort').click(get_page_list(sort=this.text));
 
 
-function get_page_list(sort=null, index=0, size=0){
+function get_page_list(sort=undefined, index=0, size=0){
     $.post(address +'/api/page/get_page_list',
     {
         sort: sort,
