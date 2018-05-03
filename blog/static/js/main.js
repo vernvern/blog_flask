@@ -27,7 +27,7 @@ $("[href='#article']").click(function(){
 
 
 // Article － 根据分类获取文章标题列表
-$("[href='#sort']").click(function(){
+$("a.sort").click(function(){
     $.post(address +'/api/page/get_page_list',
     {
         sort: this.text(),
@@ -149,7 +149,7 @@ function get_sort_list(){
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
             sort = '<div class="col-md-5 col-md-offset-1">' +
-               '<a class="sort" href="#sort">' +  sorts[i] + '</a>' +
+               '<a class="sort" href="javascraddresst:void(0);">' +  sorts[i] + '</a>' +
                 "</div>";
             _sorts += sort;
         }
@@ -157,7 +157,6 @@ function get_sort_list(){
         $("#sort").prepend(_sorts);
     })
 };
-
 
 
 // 以下代码摘自whxaxes的https://github.com/whxaxes/canvas-test/blob/master/src/3D-demo/3Dtag.html
