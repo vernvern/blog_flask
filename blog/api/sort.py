@@ -1,6 +1,5 @@
 # -*- coding=utf-8 -*-
 
-from blog import app
 from blog.toolkit.route.route import http
 from blog.modules.page import Page
 

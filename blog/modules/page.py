@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 
 import re
-import os
 import glob
 import yaml
 import uuid
