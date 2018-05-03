@@ -27,7 +27,7 @@ $("[href='#article']").click(function(){
 
 
 // Article － 根据分类获取文章标题列表
-$(".sort").click(function(event){
+$("[href='#article']").click(function(event){
     $.post(address +'/api/page/get_page_list',
     {
         sort: event.this(),
@@ -148,8 +148,8 @@ function get_sort_list(){
         var sorts = ret.data
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
-            sort = '<div class="col-md-5 col-md-offset-1 sort">' +
-               '<a class="tag" href="#">' +  sorts[i] + '</a>' +
+            sort = '<div class="col-md-5 col-md-offset-1">' +
+               '<a class="sort" href="#sort">' +  sorts[i] + '</a>' +
                 "</div>";
             _sorts += sort;
         }
