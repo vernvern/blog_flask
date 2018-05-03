@@ -26,6 +26,35 @@ $("[href='#article']").click(function(){
 });
 
 
+// Article － 根据分类获取文章标题列表
+$(".sort").click(function(){
+    $.post(address +'/api/page/get_page_list',
+    {
+        sort=this.text();
+    },
+    function(ret){
+        $("#article").text("");
+        var insert = '<ul class="page">'
+        var pages = ret.data
+        for(i=0; i<pages.length; i++){
+            var page = pages[i];
+            var date = new Date(page.date_created);
+            date = date.getFullYear() + '-' +
+                (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-' +
+                date.getDate();
+            date = "<span class='date'>" + date + '</span>'
+            var page ='<a class="page" href="javascraddresst:void(0);" onclick="show_page(id)" id=' + page.id + '>' + page.title + "</a>"
+            var li = '<li class="page' + '">' + date + page + "</li>"
+            insert = insert + li
+        }
+        insert = insert + "</ul>"
+
+        $("#article").append(insert)
+    })
+});
+
+
+
 // index/artice - 事件 - 文章详情
 function show_page(id){
     $.post(address + '/api/page/get_page_detail',
@@ -119,14 +148,13 @@ function get_sort_list(){
         var sorts = ret.data
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
-            sort = '<div class="col-md-5 col-md-offset-1">' + sorts[i] + "</div>";
-            _sorts += sort;
+            sort = '<div class="col-md-5 col-md-offset-1 sort">' + sorts[i] + "</div>";
+ sort            _sorts += sort;
         }
         _sorts += '</div>';
         $("#sort").prepend(_sorts);
     })
 };
-
 
 
 

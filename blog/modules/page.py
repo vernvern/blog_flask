@@ -33,7 +33,7 @@ class Page:
                       key=lambda x: x['date_created'],
                       reverse=True)
 
-    def get_page_list(self, mode='title', index=0, size=0, sort=None):
+    def get_page_list(self, mode='detail', index=0, size=0, sort=None):
 
         page_list = []
         for page in self.pages:

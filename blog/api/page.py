@@ -12,7 +12,10 @@ page = Page()
 
 @http(methods=['POST'])
 def get_page_list():
-    return page.get_page_list()
+    size = request.form.get('size'. 0)
+    sort = request.form.get('sort', None)
+    index = request.form.get('index', 0)
+    return page.get_page_list(index=index, size=size, sort=sort)
 
 
 @http(methods=['POST'])
