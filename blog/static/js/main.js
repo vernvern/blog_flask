@@ -149,7 +149,7 @@ function get_sort_list(){
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
             sort = '<div class="col-md-5 col-md-offset-1 sort">' + sorts[i] + "</div>";
- sort            _sorts += sort;
+            _sorts += sort;
         }
         _sorts += '</div>';
         $("#sort").prepend(_sorts);
