@@ -1,12 +1,5 @@
 var address = 'http://45.76.100.76'
 
-// artile - 事件 - 文章标题列表
-$("[href='#article']").click(get_page_list());
-
-
-// artile - 事件 - 根据分类获取文章标题列表
-$("a.sort").click(get_page_list(sort=this.text));
-
 
 function get_page_list(sort=undefined, index=0, size=0){
     $.post(address +'/api/page/get_page_list',
@@ -113,14 +106,6 @@ $(function(){
     animate();
 })
 
-// index - 事件 - 查看更多
-$("#show_more_article").click(function(){
-    var index = $("#show_more_article").attr("value");
-    get_simple_page_list(index, 20);
-
-});
-
-
 // sort - 获取sort
 function get_sort_list(){
     $.get(address +'/api/sort/get_sort_list',
@@ -130,7 +115,7 @@ function get_sort_list(){
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
             sort = '<div class="col-md-5 col-md-offset-1">' +
-               '<a class="sort" href="#">' +  sorts[i] + '</a>' +
+               '<a class="sort" href="#" onclick="get_page_list();return false">' +  sorts[i] + '</a>' +
                 "</div>";
             _sorts += sort;
         }
@@ -138,6 +123,27 @@ function get_sort_list(){
         $("#sort").prepend(_sorts);
     })
 };
+
+// ------------------------------------------------------ 事件
+
+
+// artile - 事件 - 文章标题列表
+$("[href='#article']").click(get_page_list());
+
+
+// artile - 事件 - 根据分类获取文章标题列表
+// $("a.sort").click(get_page_list(sort=this.text));
+
+
+// index - 事件 - 查看更多
+$("#show_more_article").click(function(){
+    var index = $("#show_more_article").attr("value");
+    get_simple_page_list(index, 20);
+
+});
+
+
+// ----------------------------------------------------- 3d tag
 
 
 // 以下代码摘自whxaxes的https://github.com/whxaxes/canvas-test/blob/master/src/3D-demo/3Dtag.html
