@@ -130,7 +130,7 @@ function get_sort_list(){
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
             sort = '<div class="col-md-5 col-md-offset-1">' +
-               '<p class="sort">' +  sorts[i] + '</p>' +
+               '<p class="sort"' +  sorts[i] + '</p>' +
                 "</div>";
             _sorts += sort;
         }
