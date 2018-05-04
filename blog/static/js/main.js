@@ -5,7 +5,7 @@ $("[href='#article']").click(get_page_list());
 
 
 // artile - 事件 - 根据分类获取文章标题列表
-$('p.sort').click(get_page_list(sort=this.text));
+$("a.sort").click(get_page_list(sort=this.text));
 
 
 function get_page_list(sort=undefined, index=0, size=0){
@@ -130,7 +130,7 @@ function get_sort_list(){
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
             sort = '<div class="col-md-5 col-md-offset-1">' +
-               '<p class="sort">' +  sorts[i] + '</p>' +
+               '<a class="sort">' +  sorts[i] + '</a>' +
                 "</div>";
             _sorts += sort;
         }
