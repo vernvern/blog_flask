@@ -9,7 +9,7 @@ function get_page_list(sort=undefined, index=0, size=0){
         size: size
     },
     function(ret){
-        $("#article").text("");
+        $(".tab-pane").text("");
         var insert = '<ul class="page">'
         var pages = ret.data
         for(i=0; i<pages.length; i++){
