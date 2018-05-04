@@ -5,7 +5,7 @@ $("[href='#article']").click(get_page_list());
 
 
 // artile - 事件 - 根据分类获取文章标题列表
-$('p.sort').click(get_page_list(sort=this.text));
+$("a.sort").click(get_page_list(sort=this.text));
 
 
 function get_page_list(sort=undefined, index=0, size=0){
@@ -103,23 +103,6 @@ function get_simple_page_list(index=1, size=20){
         $("#show_more_article").attr("value", index - 0 + 1);
     })}
 
-// index - 事件 - 加载完页面触发
-$(function(){
-    get_simple_page_list(1, 20);
-    get_sort_list();
-
-    // 3d词云
-    innit();
-    animate();
-})
-
-// index - 事件 - 查看更多
-$("#show_more_article").click(function(){
-    var index = $("#show_more_article").attr("value");
-    get_simple_page_list(index, 20);
-
-});
-
 
 // sort - 获取sort
 function get_sort_list(){
@@ -138,6 +121,35 @@ function get_sort_list(){
         $("#sort").prepend(_sorts);
     })
 };
+
+
+// ------------------------------------------------------ 事件
+
+
+// artile - 事件 - 文章标题列表
+$("[href='#article']").click(get_page_list());
+
+
+// index - 事件 - 查看更多
+$("#show_more_article").click(function(){
+    var index = $("#show_more_article").attr("value");
+    get_simple_page_list(index, 20);
+
+});
+
+
+// index - 事件 - 加载完页面触发
+$(function(){
+    get_simple_page_list(1, 20);
+    get_sort_list();
+
+    // 3d词云
+    innit();
+    animate();
+})
+
+
+// ----------------------------------------------------- 3d tag
 
 
 // 以下代码摘自whxaxes的https://github.com/whxaxes/canvas-test/blob/master/src/3D-demo/3Dtag.html
