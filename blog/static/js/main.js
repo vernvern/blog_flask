@@ -25,7 +25,7 @@ function get_page_list(sort=undefined, index=0, size=0){
         }
         insert = insert + "</ul>"
 
-        $("#article").append(insert)
+        $(".tab-pane").append(insert)
     })
 }
 
@@ -96,16 +96,6 @@ function get_simple_page_list(index=1, size=20){
         $("#show_more_article").attr("value", index - 0 + 1);
     })}
 
-// index - 事件 - 加载完页面触发
-$(function(){
-    get_simple_page_list(1, 20);
-    get_sort_list();
-
-    // 3d词云
-    innit();
-    animate();
-})
-
 // sort - 获取sort
 function get_sort_list(){
     $.get(address +'/api/sort/get_sort_list',
@@ -131,16 +121,23 @@ function get_sort_list(){
 $("[href='#article']").click(get_page_list());
 
 
-// artile - 事件 - 根据分类获取文章标题列表
-// $("a.sort").click(get_page_list(sort=this.text));
-
-
 // index - 事件 - 查看更多
 $("#show_more_article").click(function(){
     var index = $("#show_more_article").attr("value");
     get_simple_page_list(index, 20);
 
 });
+
+
+// index - 事件 - 加载完页面触发
+$(function(){
+    get_simple_page_list(1, 20);
+    get_sort_list();
+
+    // 3d词云
+    innit();
+    animate();
+})
 
 
 // ----------------------------------------------------- 3d tag
