@@ -105,7 +105,7 @@ function get_sort_list(){
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
             sort = '<div class="col-md-5 col-md-offset-1">' +
-               '<a class="sort" href="#" onclick="get_page_list();return false">' +  sorts[i] + '</a>' +
+               '<a class="sort" href="#" onclick="get_page_list(sort=this.text);return false">' +  sorts[i] + '</a>' +
                 "</div>";
             _sorts += sort;
         }
