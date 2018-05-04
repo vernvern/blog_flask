@@ -3,21 +3,25 @@
 from flask import request
 
 from blog.toolkit.route.route import http
-from blog.modules import page
+from blog.modules.page import Page
 
 
 urls = 'api/page'
+page = Page()
 
 
 @http(methods=['POST'])
 def get_page_list():
-    return page.get_page_list()
+    size = int(request.form.get('size', 0))
+    sort = request.form.get('sort', None)
+    index = int(request.form.get('index', 0))
+    return page.get_page_list(index=index, size=size, sort=sort)
 
 
 @http(methods=['POST'])
 def get_page_detail():
-    name = request.form['name']
-    data = page.get_page_detail(name)
+    _id = request.form['id']
+    data = page.get_page(_id)
     return {'data': data}
 
 
