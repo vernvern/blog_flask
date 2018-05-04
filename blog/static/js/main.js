@@ -16,7 +16,7 @@ function get_page_list(sort=undefined, index=0, size=0){
         size: size
     },
     function(ret){
-        $("[href='#article']").text("");
+        $("#article").text("");
         var insert = '<ul class="page">'
         var pages = ret.data
         for(i=0; i<pages.length; i++){
@@ -32,7 +32,7 @@ function get_page_list(sort=undefined, index=0, size=0){
         }
         insert = insert + "</ul>"
 
-        $("[href='#article']").append(insert)
+        $("#article").append(insert)
     })
 }
 
