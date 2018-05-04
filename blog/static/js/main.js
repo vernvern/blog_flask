@@ -9,7 +9,7 @@ function get_page_list(sort=undefined, index=0, size=0){
         size: size
     },
     function(ret){
-        $(".tab-pane").text("");
+        $("[href='#article']").text("");
         var insert = '<ul class="page">'
         var pages = ret.data
         for(i=0; i<pages.length; i++){
@@ -25,7 +25,7 @@ function get_page_list(sort=undefined, index=0, size=0){
         }
         insert = insert + "</ul>"
 
-        $(".tab-pane").append(insert)
+        $("[href='#article']").append(insert)
     })
 }
 
@@ -105,7 +105,7 @@ function get_sort_list(){
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
             sort = '<div class="col-md-5 col-md-offset-1">' +
-               '<a class="sort" href="#" onclick="get_page_list(sort=this.text);return false">' +  sorts[i] + '</a>' +
+               '<a class="sort" href="#article" onclick="get_page_list(sort=this.text);return false">' +  sorts[i] + '</a>' +
                 "</div>";
             _sorts += sort;
         }
