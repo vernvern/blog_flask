@@ -7,7 +7,7 @@ $("[href='#article']").click(get_page_list());
 // artile - 事件 - 根据分类获取文章标题列表
 $('p.sort').click(get_page_list(sort=this.text));
 
-
+// 点击Article的时候调用
 function get_page_list(sort=undefined, index=0, size=0){
     $.post(address +'/api/page/get_page_list',
     {
@@ -17,24 +17,48 @@ function get_page_list(sort=undefined, index=0, size=0){
     },
     function(ret){
         $("#article").text("");
-        var insert = '<ul class="page">'
-        var pages = ret.data
-        for(i=0; i<pages.length; i++){
-            var page = pages[i];
-            var date = new Date(page.date_created);
-            date = date.getFullYear() + '-' +
-                (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-' +
-                date.getDate();
-            date = "<span class='date'>" + date + '</span>'
-            var page ='<a class="page" href="javascraddresst:void(0);" onclick="show_page(id)" id=' + page.id + '>' + page.title + "</a>"
-            var li = '<li class="page' + '">' + date + page + "</li>"
-            insert = insert + li
-        }
-        insert = insert + "</ul>"
+        var insert = format_page_list(ret.data);
 
         $("#article").append(insert)
     })
 }
+
+
+// 点击sort的时候调用
+function get_page_list_sort(sort=undefined, index=0, size=0){
+    $.post(address +'/api/page/get_page_list',
+    {
+        sort: sort,
+        index: index,
+        size: size
+    },
+    function(ret){
+        $("#sort-article").text("");
+        var insert = format_page_list(ret.data);
+
+        $("#sort-article").append(insert);
+        $("a[href=\"#profile\"").tab('show');
+    })
+}
+
+
+function format_page_list(pages){
+    var insert = '<ul class="page">'
+    for(i=0; i<pages.length; i++){
+        var page = pages[i];
+        var date = new Date(page.date_created);
+        date = date.getFullYear() + '-' +
+            (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-' +
+            date.getDate();
+        date = "<span class='date'>" + date + '</span>'
+        var page ='<a class="page" href="javascraddresst:void(0);" onclick="show_page(id)" id=' + page.id + '>' + page.title + "</a>"
+        var li = '<li class="page' + '">' + date + page + "</li>"
+        insert = insert + li
+    }
+    insert = insert + "</ul>";
+    return insert;
+}
+
 
 // index/artice - 事件 - 文章详情
 function show_page(id){
@@ -130,7 +154,7 @@ function get_sort_list(){
         var _sorts = '<div class="row">';
         for(i=0; i<sorts.length; i++){
             sort = '<div class="col-md-5 col-md-offset-1">' +
-               '<p class="sort">' +  sorts[i] + '</p>' +
+               '<a class="sort" href="#" onclick="get_page_list_sort(this.text)">' +  sorts[i] + '</a>' +
                 "</div>";
             _sorts += sort;
         }
