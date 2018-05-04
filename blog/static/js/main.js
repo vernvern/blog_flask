@@ -37,7 +37,7 @@ function get_page_list_sort(sort=undefined, index=0, size=0){
         var insert = format_page_list(ret.data);
 
         $("#sort-article").append(insert);
-        $("a[href=\"#profile\"").tab('show');
+        $("a[href='#sort-article']").tab('show');
     })
 }
 
