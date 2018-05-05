@@ -36,7 +36,6 @@ def log_response(response):
     log += '[Return]\n'
     args = response.data.decode('utf-8')
     log += args
-    print(dir(response))
 
     app.logger.info(log)
     return response
