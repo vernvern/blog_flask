@@ -5,7 +5,11 @@ from blog import config
 app = Flask(__name__)
 
 # 加载配置
-app.config.from_object(config.ProductConfig)
+if app.config['DEBUG']:
+    app.config.from_object(config.DebugConfig)
+else:
+    app.config.from_object(config.ProductConfig)
+
 import blog.settings
 
 # 注册url
