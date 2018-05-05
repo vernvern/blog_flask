@@ -24,7 +24,6 @@ def log_request():
         args = ['    %s: %s' % (k, v) for k, v in request.args.items()]
         log += '[Args]\n'
         log += '\n'.join(args)
-    # 调用接口 log
     app.logger.info(log)
 
 
