@@ -34,8 +34,7 @@ def log_response(response):
     '''
     log = '[HTTP Code] %s\n' % response.status
     log += '[Return]\n'
-    args = response.data.decode('utf-8')
-    log += args
+    log += response.data.decode('utf-8')
 
     app.logger.info(log)
     return response
