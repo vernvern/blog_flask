@@ -63,9 +63,6 @@ app.logger.addHandler(error_handler)
 app.logger.addHandler(debug_console_handler)
 
 
-# api 500 日志
-
-
 # --------------------   views函数返回python对象时，处理成json格式
 
 
