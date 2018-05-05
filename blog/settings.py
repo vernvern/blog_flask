@@ -74,40 +74,6 @@ app.logger.addHandler(error_handler)
 app.logger.addHandler(debug_console_handler)
 
 
-def log_request(func, rule, **options):
-    ''' api 请求日志
-    '''
-    @functools.wraps(func)
-    def wrapper(*args, **kw):
-        ret = func(*args, **kw)
-        log = '[Func] %s.%s\n' % (func.__module__, func.__name__)
-        if request.method == 'POST' and request.form.keys():
-            args = ['    %s: %s' % (k, v) for k, v in request.form.items()]
-            log += '[Args]\n'
-            log += '\n'.join(args)
-        elif request.method == 'GET' and dict(request.args.keys()):
-            args = ['    %s: %s' % (k, v) for k, v in request.args.items()]
-            log += '[Args]\n'
-            log += '\n'.join(args)
-        # 调用接口 log
-        app.logger.info(log)
-        return ret
-    return wrapper
-
-
-def log_api_200(response):
-    ''' api 200 日志
-    '''
-    log = '[HTTP Code] 200\n'
-    log += '[Return]\n'
-    args = ['    %s: %s' % (k, v) for k, v in response.items()]
-    message = '\n'.join(args)
-    log += message
-
-    app.logger.info(log)
-    return
-
-
 # api 500 日志
 
 
@@ -137,8 +103,6 @@ class MyResponse(Response):
 
             if not response.get('total', False):
                 response['total'] = 0
-
-            log_api_200(response)  # 200 日志
 
             response = jsonify(response)
 
