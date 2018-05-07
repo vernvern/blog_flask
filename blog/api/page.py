@@ -21,8 +21,8 @@ def get_page_list():
 @http(methods=['POST'])
 def get_page_detail():
     _id = request.form['id']
-    page = page.get_page(_id)
-    return {'data': page.__dict__}
+    _page = page.get_page(_id)
+    return {'data': _page.__dict__}
 
 
 @http(methods=['POST'])
