@@ -1,8 +1,11 @@
 #! /bin/bash
-flake8 --ignore=E402,F841,E402 --exclude=__init__.py
-if [ $? == '0' ]; then
+
+flake8 --ignore=E402,F841,E402,F811 --exclude=__init__.py
+
+ret_code=$?
+if [ $ret_code == '0' ]; then
     figlet 'c o m m i t !'
-    return 1
 else
-    return 0
+    figlet 'W a r n i n g !'
 fi
+exit $ret_code
