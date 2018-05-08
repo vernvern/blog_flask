@@ -9,6 +9,7 @@ import arrow
 from markdown import markdown
 
 from blog import app
+from blog.models.page import Page as _Page
 
 
 PAGE_PATH = 'blog/data/'
@@ -16,7 +17,7 @@ PAGE_PATH = 'blog/data/'
 
 class Page:
     ''' 文章辅助类 '''
-    _pages = {}  # {'id': page_dict}
+    _pages = {}  # {'id': Page object}
     _singleton = None
 
     def __init__(self):
@@ -30,14 +31,14 @@ class Page:
     @property
     def pages(self):
         return sorted((p for p in self._pages.values()),
-                      key=lambda x: x['date_created'],
+                      key=lambda x: x.date_created,
                       reverse=True)
 
     def get_page_list(self, mode='detail', index=0, size=0, sort=None):
 
         page_list = []
         for page in self.pages:
-            body = markdown(page['body'],
+            body = markdown(page.body,
                             extensions=app.config['EXTENSTIONS'])
 
             if mode == 'simple':
@@ -46,9 +47,9 @@ class Page:
                 if preview:
                     body = body[:preview.span()[1]]
 
-            tmp_page = dict(title=page['title'], id=page['id'],
-                            sort=page['sort'], body=body,
-                            date_created=page['date_created'])
+            tmp_page = dict(title=page.title, id=page.id,
+                            sort=page.sort, body=body,
+                            date_created=page.date_created)
             page_list.append(tmp_page)
 
         # 分类筛选
@@ -65,12 +66,12 @@ class Page:
                 'index': index, 'size': size}
 
     def get_sorts(self):
-        return list(set([p['sort'] for p in self.pages]))
+        return list(set([p.sort for p in self.pages]))
 
     def get_page(self, _id):
         page = self._pages[_id]
-        page['body'] = markdown(
-            page['body'], extensions=app.config['EXTENSTIONS'])
+        page.body = markdown(
+            page.body, extensions=app.config['EXTENSTIONS'])
         return page
 
     @staticmethod
@@ -126,4 +127,4 @@ class Page:
                     continue
 
                 meta.update({'body': body})
-                cls._pages[meta['id']] = meta
+                cls._pages[meta['id']] = _Page(**meta)

@@ -2,7 +2,6 @@
 import sys
 import arrow
 import logging
-import functools
 
 from flask import Response, jsonify, request
 
