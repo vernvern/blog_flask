@@ -1,0 +1,9 @@
+---
+
+# - name: update server`s sourse
+#   shell: apt-get update
+#   ignore_errors: True
+#   register: update_server_sourse
+
+- name: test
+  shell: touch ~/test && sleep 4

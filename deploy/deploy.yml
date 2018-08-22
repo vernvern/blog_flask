@@ -1,0 +1,10 @@
+---
+
+- name: setup dependence
+  gather_facts: no
+  hosts:
+    - "{{ mode }}_test"
+  roles:
+    - dependence
+  tags: dependence
+
