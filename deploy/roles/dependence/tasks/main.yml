@@ -1,9 +1,21 @@
 ---
 
-# - name: update server`s sourse
-#   shell: apt-get update
-#   ignore_errors: True
-#   register: update_server_sourse
+- name: install tools
+  apt:
+    name: "{{ packages }}"
+    update_cache: yes
+    only_upgrade: yes
+  vars:
+    packages:
+    - git
+    - curl
 
-- name: test
-  shell: touch ~/test && sleep 4
+# - name: git checkout tag TODO:根据 {{ mode }} 选择分支
+#
+# - name: install docker
+
+# - name: docker images
+
+# - name: docker container
+
+# - name : links to server`s codes and docker container

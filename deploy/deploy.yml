@@ -3,7 +3,7 @@
 - name: setup dependence
   gather_facts: no
   hosts:
-    - "{{ mode }}_test"
+    - "{{ mode }}_server"
   roles:
     - dependence
   tags: dependence
