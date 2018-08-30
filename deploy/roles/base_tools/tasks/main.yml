@@ -1,5 +1,9 @@
 ---
 
+- name: show mode
+  shell: echo '{{ mode }}'
+  register: show_mode
+
 - name: check git
   shell: which git
   register: check_git 
@@ -30,3 +34,4 @@
     update: yes
     clone: yes
     version: "{{ code_tag }}"
+  when: show_mode.stdout.find('local') == -1
