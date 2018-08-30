@@ -1,0 +1,24 @@
+---
+
+- name: check docker exist
+  shell: which docker
+  register: check_docker_exist
+  ignore_errors: True
+
+- name: add GPG key
+  # 国内源
+  shell: curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+  # 官方源
+  # shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  when: check_docker_exist.stdout.find("docker") == -1
+  
+- name: add docker`s source
+  shell: 'add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"'
+  when: check_docker_exist.stdout.find("docker") == -1
+
+- name: install docker
+  apt:
+    name: docker-ce
+    update_cache: yes
+  when: check_docker_exist.stdout.find("docker") == -1
+ 

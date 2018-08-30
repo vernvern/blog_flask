@@ -1,10 +1,20 @@
 ---
 
-- name: setup dependence
+- name: base tools
   gather_facts: no
   hosts:
     - "{{ mode }}_server"
   roles:
-    - dependence
-  tags: dependence
+    - base_tools
+  vars_files:
+    - "vars/{{ mode }}_kwargs"
+  tags: base_tools
+
+- name: docker
+  gather_facts: no
+  hosts:
+    - "{{ mode }}_server"
+  roles:
+    - docker
+  tags: docker
 

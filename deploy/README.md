@@ -1,6 +1,6 @@
 # ansible
 
-## 初次使用
+## init
 
 - 本地安装ansible
 
@@ -8,9 +8,13 @@
 
 - 服务器添加ssh key(本地执行 `sh-copy-id user@192.168.0.0.1`)
 
-- 使用ansible命令
+## 使用
 
-## ansible 参数
+本地: ansible-playbook deploy.yml -e mode=local -e code_tag=master
+
+生产环境: ansible-playbook deploy.yml -e mode=production -e code_tag=master
+
+## 参数
 
 
 - **mode** - 选择服务器

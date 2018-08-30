@@ -1,0 +1,32 @@
+---
+
+- name: check git
+  shell: which git
+  register: check_git 
+  ignore_errors: True
+
+- name: install git 
+  apt:
+    name: git
+    update_cache: yes
+  when: check_git.stdout.find('git') == -1
+
+- name: check curl
+  shell: which curl
+  register: check_curl
+  ignore_errors: True
+
+- name: install curl
+  apt:
+    name: curl
+    update_cache: yes
+  when: check_curl.stdout.find('curl') == -1
+  
+
+- name: clone code
+  git:
+    repo: https://github.com/vernvern/blog_flask.git
+    dest: /opt/src/blog
+    update: yes
+    clone: yes
+    version: "{{ code_tag }}"
