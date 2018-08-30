@@ -16,7 +16,7 @@
 
 > 首次使用，需要将宿主机代码仓连接到虚拟机 /opt/src/blog
 
-命令: ansible-playbook deploy.yml -e mode=local -e code_tag=master
+命令: ansible-playbook deploy.yml -e mode=local
 
 ### 生产环境
 
