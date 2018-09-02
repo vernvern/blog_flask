@@ -35,8 +35,6 @@
   docker_image:
     name: blog:python-3.6.4
     path: "{{ dockerfile_path_python }}"
-    repository:
-    tag: release
 
 - name: docker build nginx
   docker_image:
