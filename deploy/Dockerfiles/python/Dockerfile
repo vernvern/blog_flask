@@ -7,6 +7,6 @@ WORKDIR /opt/src
 EXPOSE 8000
 COPY ./requirements.txt /opt/src/
 RUN pip install --upgrade pip \
-    && pip install -r /opt/src/blog/deploy/Dockerfiles/python/requirements.txt --no-cache-dir
+    && pip install -r /opt/src/requirements.txt --no-cache-dir
 VOLUME ['/opt/script', '/opt/log', '/opt/data', '/opt/src']
 CMD gunicorn -w 4 -b 0.0.0.0:8000 wsgi:app
