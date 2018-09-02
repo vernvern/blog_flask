@@ -20,3 +20,12 @@
     - docker
   tags: docker
 
+- name: python
+  gather_facts: no
+  hosts:
+    - "{{ mode }}_server"
+  vars_files:
+    - "vars/{{ mode }}_kwargs"
+  roles:
+    - python
+  tags: python

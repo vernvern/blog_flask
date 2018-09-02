@@ -31,18 +31,22 @@
   shell: echo 'DOCKER_OPTS="--registry-mirror=https://registry.docker-cn.com"' >> /etc/default/docker
   when: check_docker_opts is failed
 
-- name: docker container python
+- name: docker build python
   docker_image:
     name: blog:python-3.6.4
     path: "{{ dockerfile_path_python }}"
     repository:
     tag: release
 
-- name: docker container nginx
+- name: docker build nginx
   docker_image:
     name: blog:nginx-1.13.9
     path: "{{ dockerfile_path_nginx }}"
 
-- name: docker network
+- name: docker create network
   docker_network:
     name: docker_newwork
+    ipam_options: 
+      subnet: '192.168.1.1/24'
+      gateway: 192.168.1.1
+

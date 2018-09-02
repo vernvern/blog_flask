@@ -1,10 +1,12 @@
 ---
 
-- name: python`s docker container
+- name: python`s docker run
   docker_container: 
-  name: blog_python
-  image: blog:python-3.6.4
-  volumes:
+    name: blog_python
+    image: blog:python-3.6.4
+    volumes:
     - /opt/log:/opt/log
     - /root/blog:/opt/src/blog
-
+    networks:
+      - name: docker_newwork
+        ipv4_address: 192.168.1.3
