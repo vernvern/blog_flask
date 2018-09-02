@@ -13,7 +13,7 @@
   apt:
     name: git
     update_cache: yes
-  when: check_git.stdout.find('git') == -1
+  when: check_git is failed
 
 - name: check curl
   shell: which curl
@@ -24,9 +24,8 @@
   apt:
     name: curl
     update_cache: yes
-  when: check_curl.stdout.find('curl') == -1
+  when: check_curl is failed
   
-
 - name: clone code
   git:
     repo: https://github.com/vernvern/blog_flask.git
@@ -34,4 +33,24 @@
     update: yes
     clone: yes
     version: "{{ code_tag }}"
-  when: show_mode.stdout.find('local') == -1
+  when: show_mode is failed
+
+- name: check pip
+  shell: which pip
+  register: check_pip
+  ignore_errors: True
+
+- name: isntall pip
+  apt:
+    name: python-pip
+    update_cache: yes
+  when: check_pip is failed
+
+- name: check python`s docker module
+  shell: pip show docker
+  register: check_python_docker
+  ignore_errors: True
+
+- name: install python`s docker module
+  shell: pip install docker
+  when: check_python_docker is failed

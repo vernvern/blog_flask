@@ -1,0 +1,10 @@
+---
+
+- name: python`s docker container
+  docker_container: 
+  name: blog_python
+  image: blog:python-3.6.4
+  volumes:
+    - /opt/log:/opt/log
+    - /root/blog:/opt/src/blog
+

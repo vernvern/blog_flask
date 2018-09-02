@@ -10,15 +10,39 @@
   shell: curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
   # 官方源
   # shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  when: check_docker_exist.stdout.find("docker") == -1
+  when: check_docker_exist is failed
   
 - name: add docker`s source
   shell: 'add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"'
-  when: check_docker_exist.stdout.find("docker") == -1
+  when: check_docker_exist is failed
 
 - name: install docker
   apt:
     name: docker-ce
     update_cache: yes
-  when: check_docker_exist.stdout.find("docker") == -1
- 
+  when: check_docker_exist is failed
+
+- name: check docker opts
+  shell: cat /etc/default/docker | grep '^DOCKER_OPTS'
+  register: check_docker_opts
+  ignore_errors: True
+
+- name: input docker opts
+  shell: echo 'DOCKER_OPTS="--registry-mirror=https://registry.docker-cn.com"' >> /etc/default/docker
+  when: check_docker_opts is failed
+
+- name: docker container python
+  docker_image:
+    name: blog:python-3.6.4
+    path: "{{ dockerfile_path_python }}"
+    repository:
+    tag: release
+
+- name: docker container nginx
+  docker_image:
+    name: blog:nginx-1.13.9
+    path: "{{ dockerfile_path_nginx }}"
+
+- name: docker network
+  docker_network:
+    name: docker_newwork

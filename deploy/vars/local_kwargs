@@ -1,1 +1,6 @@
 ---
+
+
+# docker
+dockerfile_path_python: /opt/src/blog/deploy/Dockerfiles/python
+dockerfile_path_nginx: /opt/src/blog/deploy/Dockerfiles/nginx
