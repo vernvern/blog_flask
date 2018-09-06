@@ -1,11 +1,9 @@
 # python 基础镜像
-FROM python:3.6.4-jessie as base
-WORKDIR /opt/src
 
-FROM python:3.6.4-jessie as release
+FROM python:3.6.4-jessie
 WORKDIR /opt/src
 EXPOSE 8000
-COPY /opt/src/blog/deploy/Dockerfiles/python/requirements.txt /opt/src/
+COPY ./requirements.txt /opt/src/
 RUN pip install --upgrade pip \
     && pip install -r /opt/src/requirements.txt --no-cache-dir
 VOLUME ['/opt/script', '/opt/log', '/opt/data', '/opt/src']
