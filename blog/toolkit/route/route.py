@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 import os.path
 
 from blog import app
@@ -10,7 +12,8 @@ def http(rule=None, **options):
         # 处理前缀
         try:
             imp = 'from %s import urls' % func.__module__
-            exec(imp)
+            # TODO: 为什么要用in globals()
+            exec(imp) in globals()
         except ImportError as e:
             profix = '/'.join(func.__module__.split('.')[2:])
         else:
