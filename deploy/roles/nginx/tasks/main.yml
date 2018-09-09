@@ -1,5 +1,9 @@
 ---
 
+- name: nginx`s log
+  shell: mkdir /opt/log/nginx -p && touch /opt/log/nginx/access.log && touch /opt/log/nginx/error.log
+
+
 - name: nginx`s docker container
   docker_container: 
     name: blog_nginx
