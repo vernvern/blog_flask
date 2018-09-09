@@ -7,4 +7,5 @@ COPY ./requirements.txt /opt/src/blo
 RUN pip install --upgrade pip \
     &&  pip install -r /opt/src/requirements.txt --no-cache-dir
 VOLUME ['/opt/script', '/opt/log', '/opt/data', '/opt/src']
-CMD gunicorn -w 4 -b 0.0.0.0:8000 wsgi:app
+CMD /bin/sh -c "while true; do echo hello world; sleep 1; done"
+# CMD gunicorn -w 4 -b 0.0.0.0:8000 wsgi:app
