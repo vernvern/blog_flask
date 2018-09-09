@@ -6,7 +6,7 @@
     image: blog:python-3.6.4
     volumes:
     - /opt/log:/opt/log
-    - /root/blog:/opt/src/blog
+    - /opt/src/blog:/opt/src/blog
     networks:
       - name: docker_newwork
         ipv4_address: 192.168.1.3
