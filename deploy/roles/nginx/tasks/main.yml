@@ -9,4 +9,6 @@
       - /opt/src/blog:/opt/src/blog
     ports:
       - "80:80"
-
+    networks:
+      - name: docker_newwork
+        ipv4_address: 192.168.1.4
