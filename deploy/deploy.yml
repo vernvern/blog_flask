@@ -29,3 +29,13 @@
   roles:
     - python
   tags: python
+
+- name: nginx
+  gather_facts: no
+  hosts:
+    - "{{ mode }}_server"
+  vars_files:
+    - "vars/{{ mode }}_kwargs"
+  roles:
+    - nginx
+  tags: nginx

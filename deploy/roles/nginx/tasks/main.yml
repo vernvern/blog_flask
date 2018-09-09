@@ -2,9 +2,11 @@
 
 - name: nginx`s docker container
   docker_container: 
-  name: blog_nginx
-  image: blog:nginx-1.13.9
-  volumes:
-    - /opt/log:/opt/log
-    - /root/blog:/opt/src/blog
+    name: blog_nginx
+    image: blog:nginx-1.13.9
+    volumes:
+      - /opt/log:/opt/log
+      - /opt/src/blog:/opt/src/blog
+    ports:
+      - "80:80"
 
