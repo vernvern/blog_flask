@@ -31,6 +31,15 @@
   shell: echo 'DOCKER_OPTS="--registry-mirror=https://registry.docker-cn.com"' >> /etc/default/docker
   when: check_docker_opts is failed
 
+- name: check python`s module-docker
+  shell: pip show docker
+  ignore_errors: True
+  register: check_python_module_docker
+
+- name: install python`s moduels-docker
+  shell: pip install docker==3.5.0
+  when: check_python_module_docker.stdout.find('docker') ==  -1
+
 - name: docker build python
   docker_image:
     name: blog:python-3.6.4
@@ -41,6 +50,7 @@
   docker_image:
     name: blog:nginx-1.13.9
     path: "{{ dockerfile_path_nginx }}"
+    nocache: yes
 
 - name: docker create network
   docker_network:
