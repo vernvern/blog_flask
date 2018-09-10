@@ -1,7 +1,7 @@
 # python 基础镜像
 
 FROM python:3.6.4-jessie
-WORKDIR /opt/src/blog
+WORKDIR /opt/src/blog/blog
 EXPOSE 8000
 COPY ./requirements.txt /opt/src/blog
 RUN pip install --upgrade pip \
