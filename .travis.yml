@@ -8,12 +8,11 @@ services:
     - docker
 
 before_install:
-    - docker build --target debug -t blog:python-3.6.4 ./deploy/Dockerfiles/python
+    - docker build -t blog:python-3.6.4 ./deploy/Dockerfiles/python
 
 script:
-    - sh ./deploy/docker_test_run.sh
-    - docker ps
-    - docker inspect blog_python
+    - sh ./deploy/travis_docker_run.sh
+    - ls /home/travis/build/vernvern/blog_flask
     - docker exec -it blog_python nosetests -v --with-coverage --cover-package=blog --cover-xml
 
 after_success:

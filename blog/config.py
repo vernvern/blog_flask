@@ -9,7 +9,7 @@ class Config():
     LOG_INFO_FILE_PATH = '/opt/log/stdout.log'
     LOG_ERROR_FILE_PATH = '/opt/log/stderr.log'
     LOG_LEVEL = logging.INFO
-    PAGE_PATH = 'blog/data/'
+    PAGE_PATH = 'blog/data'
 
     # markdown
     EXTENSTIONS = ['markdown.extensions.extra',

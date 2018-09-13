@@ -32,7 +32,6 @@
 │   └── runserver.py
 ├── test
 ├── tests
-│   ├── __init__.py
 │   └── test_page.py
 └── wsgi.py
 ```

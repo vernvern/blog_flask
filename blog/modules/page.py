@@ -5,14 +5,12 @@ import glob
 import yaml
 import uuid
 import arrow
+import os.path
 
 from markdown import markdown
 
 from blog import app
 from blog.models.page import Page as _Page
-
-
-PAGE_PATH = 'blog/data/'
 
 
 class Page:
@@ -94,8 +92,10 @@ class Page:
         if cls._pages != {}:
             return
 
-        page_path_list = glob.glob(app.config['PAGE_PATH'] + '**/*.md',
-                                   recursive=True)
+        page_path_list = glob.glob(
+            os.path.join(app.config['PAGE_PATH'], '**/*.md'),
+            recursive=True
+        )
         for page_path in page_path_list:
             path_split = page_path.split('/')
 
