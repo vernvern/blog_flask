@@ -30,7 +30,6 @@
 │   │   │   └── sources.list
 │   │   └── redis
 │   │       └── Dockerfile
-│   └── docker_test_run.sh
 ├── docs/
 ├── manage.py
 ├── tests/

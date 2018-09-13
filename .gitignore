@@ -1,5 +1,6 @@
 .gitignore
 coverage.xml
+deploy/deploy.retry
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
