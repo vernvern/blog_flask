@@ -13,6 +13,7 @@
   apt:
     name: git
     update_cache: yes
+    force: yes
   when: check_git is failed
 
 - name: check curl
@@ -24,6 +25,7 @@
   apt:
     name: curl
     update_cache: yes
+    force: yes
   when: check_curl is failed
   
 - name: pull code
@@ -44,6 +46,7 @@
   apt:
     name: python-pip
     update_cache: yes
+    force: yes
   when: check_pip is failed
 
 - name: check python`s docker module
