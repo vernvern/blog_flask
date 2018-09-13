@@ -1,4 +1,5 @@
 .gitignore
+deploy/deploy.retry
 coverage.xml
 
 # Byte-compiled / optimized / DLL files

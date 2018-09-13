@@ -6,33 +6,33 @@
 
 ```
 .
-├── .coveralls.yml
-├── .travis.yml
+├── README.md
 ├── blog
-│   ├── __init__.py
-│   ├── api/
+│   ├── api
 │   ├── config.py
-│   ├── data/
-│   ├── models/
-│   ├── modules/
+│   ├── data
+│   ├── models
+│   ├── modules
 │   ├── settings.py
-│   ├── static/
-│   ├── templates/
-│   └── toolkit/
+│   ├── static
+│   ├── templates
+│   └── toolkit
+├── coverage.xml
 ├── deploy
 │   ├── Dockerfiles
-│   │   ├── nginx
-│   │   │   ├── Dockerfile
-│   │   │   └── nginx.conf
-│   │   ├── python
-│   │   │   ├── Dockerfile
-│   │   │   ├── requirements.txt
-│   │   │   └── sources.list
-│   │   └── redis
-│   │       └── Dockerfile
+│   ├── deploy.retry
 │   └── docker_test_run.sh
-├── docs/
+├── docs
+│   └── docker.md
 ├── manage.py
-├── tests/
-
+├── pylint.conf
+├── scripts
+│   ├── pre-commit.sh
+│   ├── pre-push.sh
+│   └── runserver.py
+├── test
+├── tests
+│   ├── __init__.py
+│   └── test_page.py
+└── wsgi.py
 ```
