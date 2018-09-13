@@ -12,8 +12,7 @@ before_install:
 
 script:
     - sh ./deploy/travis_docker_run.sh
-    - docker exec -it blog_python ls
-    - docker exec -it blog_python pwd
+    - ls /home/travis/build/vernvern/blog_flask
     - docker exec -it blog_python nosetests -v --with-coverage --cover-package=blog --cover-xml
 
 after_success:
