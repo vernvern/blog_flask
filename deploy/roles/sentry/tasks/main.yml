@@ -1,0 +1,113 @@
+---
+
+- name: pull getsentry/onpremise
+  git:
+    repo: https://github.com/getsentry/onpremise.git
+    dest: ~/onpremise
+    update: yes
+    clone: yes
+    version: master
+
+- name: make 
+  shell: cd ~/onpremise && make build
+
+- name: check sentry secret key
+  shell: cat /etc/bashrc
+  register: check_sentry_secrt_key
+
+- name: add sentry secret key
+  shell: echo -n 'export SENTRY_SECRET_KEY=' >> /etc/bashrc && docker run --rm sentry-onpremise config generate-secret-key >> /etc/bashrc && echo '' >> /etc/bashrc
+  when: check_sentry_secrt_key.stdout.find('SENTRY_SECRET_KEY') == -1
+
+- name: add postgres password
+  shell: echo -n 'export POSTGRES_PASSWORD=' >> /etc/bashrc && echo 'test' >> /etc/bashrc
+  when: check_sentry_secrt_key.stdout.find('POSTGRES_PASSWORD') == -1
+
+- name: run sentry-redis
+  docker_container:
+    name: sentry-redis
+    image: redis:3.2-alpine
+    detach: yes
+
+- name: run sentry-PostgreSQL
+  docker_container:
+    name: sentry-postgres
+    image: postgres:9.5
+    detach: yes
+    env:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: sentry
+
+- name: run Outbound Email
+  docker_container:
+    name: sentry-smtp
+    image: tianon/exim4
+    detach: yes
+
+- name: upgrade sentry
+  docker_container:
+    detach: no
+    name: sentry
+    image: sentry-onpremise
+    links:
+      - "sentry-redis:redis"
+      - "sentry-postgres:postgres"
+      - "sentry-smtp:smtp"
+    env:
+      SENTRY_SECRET_KEY: ${SENTRY_SECRET_KEY}
+      SENTRY_POSTGRES_HOST: postgres
+      SENTRY_POSTGRES_PORT: 5432
+      SENTRY_REDIS_HOST: redis
+      SENTRY_REDIS_PORT: 6379
+    ports:
+      - "9000:9000"
+    command: sentry upgrade
+
+- name: run sentry worker
+  docker_container:
+    name: sentry-worker-01
+    image: sentry-onpremise
+    links:
+      - "sentry-redis:redis"
+      - "sentry-postgres:postgres"
+    env:
+      SENTRY_SECRET_KEY: ${SENTRY_SECRET_KEY}
+      SENTRY_POSTGRES_HOST: postgres
+      SENTRY_POSTGRES_PORT: 5432
+      SENTRY_REDIS_HOST: redis
+      SENTRY_REDIS_PORT: 6379
+    command: run worker
+
+- name: run sentry cron
+  docker_container:
+    name: sentry-cron
+    image: sentry-onpremise
+    links:
+      - "sentry-redis:redis"
+      - "sentry-postgres:postgres"
+    env:
+      SENTRY_SECRET_KEY: ${SENTRY_SECRET_KEY}
+      SENTRY_POSTGRES_HOST: postgres
+      SENTRY_POSTGRES_PORT: 5432
+      SENTRY_REDIS_HOST: redis
+      SENTRY_REDIS_PORT: 6379
+    command: run cron
+
+- name: run sentry
+  docker_container:
+    name: sentry
+    image: sentry-onpremise
+    links:
+      - "sentry-redis:redis"
+      - "sentry-postgres:postgres"
+      - "sentry-smtp:smtp"
+    env:
+      SENTRY_SECRET_KEY: ${SENTRY_SECRET_KEY}
+      SENTRY_POSTGRES_HOST: postgres
+      SENTRY_POSTGRES_PORT: 5432
+      SENTRY_REDIS_HOST: redis
+      SENTRY_REDIS_PORT: 6379
+    ports:
+      - "9000:9000"
+      - "80:80"
+    command: run web

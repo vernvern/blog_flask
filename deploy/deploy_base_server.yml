@@ -1,0 +1,26 @@
+---
+
+
+- name: base server
+  gather_facts: no
+  hosts:
+    - "base_server"
+  roles:
+    - base_server
+  tags: base_server
+
+- name: docker
+  gather_facts: no
+  hosts:
+    - "base_server"
+  roles:
+    - docker
+  tags: docker
+
+- name: sentry
+  gather_facts: no
+  hosts:
+    - "base_server"
+  roles:
+    - sentry
+  tags: sentry
