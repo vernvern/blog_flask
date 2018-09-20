@@ -1,5 +1,4 @@
 
-# -----
 [local_server]
 10.211.55.5
 
@@ -8,3 +7,6 @@
 
 [production_server]
 192.168.56.233
+
+[base_server]
+192.168.56.234

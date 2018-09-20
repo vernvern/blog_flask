@@ -40,18 +40,6 @@
   shell: pip install docker==3.5.0
   when: check_python_module_docker.stdout.find('docker') ==  -1
 
-- name: docker build python
-  docker_image:
-    name: blog:python-3.6.4
-    path: "{{ dockerfile_path_python }}"
-    pull: yes
-
-- name: docker build nginx
-  docker_image:
-    name: blog:nginx-1.13.9
-    path: "{{ dockerfile_path_nginx }}"
-    nocache: yes
-
 - name: docker create network
   docker_network:
     name: docker_newwork

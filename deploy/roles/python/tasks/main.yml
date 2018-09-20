@@ -1,5 +1,11 @@
 ---
 
+- name: docker build python
+  docker_image:
+    name: blog:python-3.6.4
+    path: "{{ dockerfile_path_python }}"
+    pull: yes
+
 - name: python`s docker run
   docker_container: 
     name: blog_python
