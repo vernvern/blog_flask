@@ -26,6 +26,16 @@ class TestCaseSchema(TestCase):
         '''
         self.assertMatchSnapshot(self.client.execute(query))
 
+        query = """
+            query Page($id: ID) {
+                page(id: $id) {
+                    id
+              }
+            }
+        """
+        kw = {'id': "1a2467e3-bc16-4e75-a432-4ad35796975f"}
+        self.assertMatchSnapshot(self.client.execute(query, variables=kw))
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,5 +1,6 @@
 # -*- coding=utf-8 -*-
 
+import copy
 import graphene
 
 from blog.modules.schema import SchemaHelper
@@ -20,9 +21,11 @@ class Query(graphene.ObjectType):
 
     page = graphene.Field(PageQL, id=graphene.ID())
 
-    def resolve_page(self, info, id):
+    def resolve_page(self, info, **kw):
+        variables = copy.deepcopy(info.variable_values)
+        variables.update(kw)
         schema_helper = SchemaHelper()
-        return schema_helper.get_page(id)
+        return schema_helper.get_page(variables['id'])
 
 
 schema = graphene.Schema(query=Query)
