@@ -8,6 +8,7 @@ import uuid
 import arrow
 
 from blog import app
+from blog.models.page import PageQL
 
 
 class SchemaHelper:
@@ -43,7 +44,6 @@ class SchemaHelper:
 
     @classmethod
     def setup(cls):
-        from blog.models.schema import PageQL
 
         if cls._pages != {}:
             return

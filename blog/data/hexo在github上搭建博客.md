@@ -4,7 +4,6 @@ date_created: '2018-09-26T11:44:46.064818+08:00'
 date_modified: '2018-09-26T11:44:46.064880+08:00'
 id: 1a2467e3-bc16-4e75-a432-4ad35796975f
 removed: false
-sort: "\u672A\u5206\u7C7B"
 tags: []
 title: "hexo\u5728github\u4E0A\u642D\u5EFA\u535A\u5BA2"
 

@@ -3,6 +3,8 @@
 import uuid
 import arrow
 
+import graphene
+
 
 class Page:
 
@@ -17,3 +19,14 @@ class Page:
         self.sort = kw.get('sort', '未分类')
         self.id = kw.get('id', str(uuid.uuid4()))
         self.removed = kw.get('removed', False)
+
+
+class PageQL(graphene.ObjectType):
+    id = graphene.ID()
+    title = graphene.String(default_value='未分类')
+    body = graphene.String()
+    date_created = graphene.String()
+    date_modified = graphene.String()
+    tags = graphene.List(graphene.String)
+    sort = graphene.String(default_value='未分类')
+    removed = graphene.Boolean()

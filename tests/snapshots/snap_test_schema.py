@@ -19,7 +19,8 @@ snapshots['TestCaseSchema::test_blog_title 1'] = {
 snapshots['TestCaseSchema::test_blog_title 2'] = {
     'data': {
         'page': {
-            'id': '1a2467e3-bc16-4e75-a432-4ad35796975f'
+            'id': '1a2467e3-bc16-4e75-a432-4ad35796975f',
+            'sort': '未分类'
         }
     }
 }

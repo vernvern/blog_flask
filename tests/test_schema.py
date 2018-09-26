@@ -29,7 +29,8 @@ class TestCaseSchema(TestCase):
         query = """
             query Page($id: ID) {
                 page(id: $id) {
-                    id
+                    id,
+                    sort
               }
             }
         """
