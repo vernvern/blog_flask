@@ -4,16 +4,12 @@ import unittest
 from snapshottest import TestCase
 from graphene.test import Client
 
-from blog.modules.schema import SchemaHelper
-from blog.models.schema import schema
+from blog.modules.schema import schema
 
 
 class TestCaseSchema(TestCase):
 
     client = Client(schema)
-
-    def setup(self):
-        self.schema_helper = SchemaHelper()
 
     def test_blog_title(self):
         query = '''
