@@ -4,6 +4,7 @@ import re
 import os
 import glob
 import yaml
+import uuid
 import arrow
 
 from blog import app
