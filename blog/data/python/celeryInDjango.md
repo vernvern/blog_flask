@@ -2,7 +2,6 @@
 
 date_created: '2018-03-22T11:52:37.868713+08:00'
 date_modified: '2018-03-22T11:52:37.868837+08:00'
-hash: 22ae9889422e851889c34ec3a909edec
 id: ab48e67f-5bc1-4342-9cc0-dc7920e38be3
 sort: python
 tags: []

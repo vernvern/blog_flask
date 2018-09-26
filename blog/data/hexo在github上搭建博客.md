@@ -1,14 +1,15 @@
 ---
 
-date_created: '2018-03-22T11:53:48.982744+08:00'
-date_modified: '2018-03-22T11:53:48.982936+08:00'
-hash: 3ab4736f6a92f08f70317c40666cdaa8
-id: a81d9010-9a9e-4778-83d8-a7c6fca9309e
+date_created: '2018-09-26T11:44:46.064818+08:00'
+date_modified: '2018-09-26T11:44:46.064880+08:00'
+id: 1a2467e3-bc16-4e75-a432-4ad35796975f
+removed: false
 sort: "\u672A\u5206\u7C7B"
 tags: []
 title: "hexo\u5728github\u4E0A\u642D\u5EFA\u535A\u5BA2"
 
 ---
+
 
 ## 初始化
 
@@ -25,25 +26,25 @@ title: "hexo\u5728github\u4E0A\u642D\u5EFA\u535A\u5BA2"
 
     1. 生成ssh-key(linux下)：
         ```
-        $ cd ~/.ssh   
-    
+        $ cd ~/.ssh
+
         $ ssh-keygen -t rsa -C "your_email@example.com"
         ```
     1. 复制公钥`id_rsa.pub`的内容
     2. github --> settings --> SSH keys and GPG keys --> new ssh key --> 粘贴公钥`id_rsa.pub`的内容 --> save
 
     另测试ssh-key：
-        
-            $ ssh -T git@github.com     
+
+            $ ssh -T git@github.com
 
     choose yes:
-        
+
                 Hi humingx! You've successfully authenticated, but GitHub does not provide shell access.
 
 ###  install hexo
 - install node.js
 - install hexo
-        
+
         npm install -g hexo
 
 ### run hexo
@@ -52,10 +53,10 @@ title: "hexo\u5728github\u4E0A\u642D\u5EFA\u535A\u5BA2"
         $ hexo init
 
 -  生成部署，第一次执行会添加一个public 文件夹，里面是博客的静态页面
-  
+
         $ hexo g
 -  生成预览
-   
+
         $ hexo s
 
 ### hexo --> github page
@@ -67,7 +68,7 @@ title: "hexo\u5728github\u4E0A\u642D\u5EFA\u535A\u5BA2"
         type: git
         repo: git@github.com:name/name.github.io.git
     ```
-- push 
+- push
 
         $ hexo d
 

@@ -1,11 +1,11 @@
 # -*- coding=utf-8 -*-
 
 from blog.toolkit.route.route import http
-from blog.modules.page import Page
+from blog.modules.page import PageHelper
 
 
 urls = 'api/sort'
-page = Page()
+page = PageHelper()
 
 
 @http(methods=['GET'])

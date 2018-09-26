@@ -1,75 +1,29 @@
-# -*- coding:utf-8 -*-
+# -*- coding=utf-8 -*-
 
 import re
+import os
 import glob
 import yaml
-import uuid
 import arrow
-import os.path
-
-from markdown import markdown
 
 from blog import app
-from blog.models.page import Page as _Page
 
 
-class PageHelper:
-    ''' 文章辅助类 '''
+class SchemaHelper:
+
     _pages = {}  # {'id': Page object}
     _singleton = None
 
     def __init__(self):
-        pass
+        SchemaHelper.setup()
 
     def __new__(cls, *args, **kw):
         if not cls._singleton:
             cls._singleton = object.__new__(cls, *args, **kw)
         return cls._singleton
 
-    @property
-    def pages(self):
-        return sorted((p for p in self._pages.values()),
-                      key=lambda x: x.date_created,
-                      reverse=True)
-
-    def get_page_list(self, index, mode='detail', size=0, sort=None):
-
-        page_list = []
-        for page in self.pages:
-            # 分类筛选
-            if sort and page.sort != sort:
-                continue
-
-            body = markdown(page.body,
-                            extensions=app.config['EXTENSTIONS'])
-
-            if mode == 'simple':
-                preview = re.search(r'<div class="toc">\n<ul>.*</ul>\n</div>',
-                                    body, re.S | re.M)
-                if preview:
-                    body = body[:preview.span()[1]]
-
-            tmp_page = dict(title=page.title, id=page.id,
-                            sort=page.sort, body=body,
-                            date_created=page.date_created)
-            page_list.append(tmp_page)
-
-        # 分页
-        start = size * (index - 1)
-        end = start + size
-        page_list = page_list[start:end]
-
-        return {'data': page_list, 'total': len(self._pages),
-                'index': index, 'size': size}
-
-    def get_sorts(self):
-        return list(set([p.sort for p in self.pages]))
-
     def get_page(self, _id):
-        page = self._pages[_id]
-        page.body = markdown(
-            page.body, extensions=app.config['EXTENSTIONS'])
-        return page
+        return self._pages[_id]
 
     @staticmethod
     def _split_meta(string):
@@ -87,7 +41,9 @@ class PageHelper:
         return meta, body
 
     @classmethod
-    def load_pages_data(cls):
+    def setup(cls):
+        from blog.models.schema import PageQL
+
         if cls._pages != {}:
             return
 
@@ -126,4 +82,4 @@ class PageHelper:
                     continue
 
                 meta.update({'body': body})
-                cls._pages[meta['id']] = _Page(**meta)
+                cls._pages[meta['id']] = PageQL(**meta)

@@ -3,18 +3,18 @@
 from flask import request
 
 from blog.toolkit.route.route import http
-from blog.modules.page import Page
+from blog.modules.page import PageHelper
 
 
 urls = 'api/page'
-page = Page()
+page = PageHelper()
 
 
 @http(methods=['POST'])
 def get_page_list():
-    size = int(request.form.get('size', 0))
+    size = int(request.form.get('size', 20))
     sort = request.form.get('sort', None)
-    index = int(request.form.get('index', 0))
+    index = int(request.form.get('index', 1))
     return page.get_page_list(index=index, size=size, sort=sort)
 
 

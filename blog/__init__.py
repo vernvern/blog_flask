@@ -14,11 +14,13 @@ else:
 
 import blog.settings
 
+
 # 注册url
 import blog.api.base
 import blog.api.page
 import blog.api.sort
 
+
 # 读数据
-from blog.modules.page import Page
-Page.load_pages_data()
+from blog.modules.page import PageHelper
+PageHelper.load_pages_data()
