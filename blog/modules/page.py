@@ -147,6 +147,14 @@ class PageQLHelper:
     def get_page(self, _id):
         return self._pages[_id]
 
+    def get_pages_by_sort(self, sort):
+        pages = sorted(
+            (p for p in self._pages.values() if p.sort == sort),
+            key=lambda x: x.date_created,
+            reverse=True
+        )
+        return list(pages)
+
     @staticmethod
     def _split_meta(string):
         ''' 分离md文件的meta和内容

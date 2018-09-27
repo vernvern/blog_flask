@@ -33,6 +33,17 @@ class TestCaseSchema(TestCase):
         kw = {'id': "1a2467e3-bc16-4e75-a432-4ad35796975f"}
         self.assertMatchSnapshot(self.client.execute(query, variables=kw))
 
+    def test_get_pages_with_sort(self):
+        query = '''
+            query PagesSort {
+                getPagesBySort (sort: "python"){
+                    id,
+                    title
+                }
+            }
+        '''
+        self.assertMatchSnapshot(self.client.execute(query))
+
 
 if __name__ == '__main__':
     unittest.main()
