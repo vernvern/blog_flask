@@ -23,7 +23,7 @@ import blog.api.sort
 
 from blog.modules.schema import schema
 # graphene web test
-if app.config['DEBUG'] is True:
+if app.config['DEBUG']:
     app.add_url_rule(
         '/graphql',
         view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True)
